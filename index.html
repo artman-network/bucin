@@ -1,0 +1,1482 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Relationship Journal Premium</title>
+
+<meta name="description"
+content="Relationship Journal modern dengan timeline, gallery, love letter, playlist, anniversary countdown, dashboard dan wishlist.">
+
+<meta name="theme-color" content="#ff7aa2">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
+
+<style>
+
+/*======================================
+ROOT & RESET
+======================================*/
+
+:root{
+    --color-1:#ffa6fe;
+    --color-2:#d5a6ff;
+    --color-3:#a9a6ff;
+    --color-4:#a6bcff;
+    --color-5:#bfa6ff;
+
+    --color:var(--color-1);
+    --gradient:linear-gradient(125deg,#6c5ce7,#ff69b4);
+
+    --bg:#16181d;
+    --card:#1f222a;
+    --text:#f2f2f2;
+    --text-light:#aaa;
+    --white:#fff;
+
+    --font:"Georgia",sans-serif;
+
+    --radius:10px;
+    --radius-lg:20px;
+    --radius-xl:30px;
+
+    --outer:
+        3px 3px 4px rgba(0,0,0,.6),
+        -3px -3px 4px rgba(255,255,255,.3);
+
+    --inset:
+        inset 3px 3px 4px rgba(0,0,0,.6),
+        inset -3px -3px 4px rgba(255,255,255,.3);
+
+    --transition:.35s;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    scroll-behavior:smooth;
+    user-select:none;
+    -webkit-user-select:none;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html {
+  font-size: 1rem;
+}
+
+body{
+    font-family:var(--font);
+    background:var(--bg);
+    color:var(--text);
+    overflow-x:hidden;
+}
+
+img{
+    width:100%;
+    display:block;
+    object-fit:cover;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+.container{
+    width:min(1200px,92%);
+    margin:auto;
+}
+
+/*======================================
+HERO
+======================================*/
+
+.hero{
+    padding:140px 0 70px;
+}
+
+.hero-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:50px;
+    align-items:center;
+}
+
+.hero-content h1{
+    font-size:56px;
+    line-height:1.1;
+    margin-bottom:20px;
+}
+
+.hero-content p{
+    font-size:17px;
+    line-height:1.8;
+    color:var(--text-light);
+    margin-bottom:30px;
+}
+
+.button{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:15px 35px;
+    border-radius:50px;
+    color:var(--white);
+    background:var(--gradient);
+    box-shadow:var(--outer);
+    transition:var(--transition);
+}
+
+.button:hover{
+    transform:translateY(-5px);
+}
+
+.photo{
+    padding:18px;
+    background:var(--card);
+    border-radius:var(--radius-xl);
+    box-shadow:var(--outer);
+}
+
+.photo img{
+    border-radius:calc(var(--radius-xl) - 8px);
+}
+
+/*======================================
+DASHBOARD
+======================================*/
+
+.dashboard{
+    margin-top:60px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:25px;
+}
+
+.card{
+    padding:28px;
+    text-align:center;
+    background:var(--card);
+    border-radius:var(--radius-lg);
+    box-shadow:var(--outer);
+    transition:var(--transition);
+}
+
+.card:hover{
+    transform:translateY(-8px);
+}
+
+.card i{
+    font-size:36px;
+    margin-bottom:15px;
+    color:var(--color);
+}
+
+.card h2{
+    font-size:32px;
+    margin-bottom:8px;
+}
+
+.card span{
+    font-size:15px;
+    color:var(--text-light);
+}
+
+/*======================================
+SECTION TITLE
+======================================*/
+
+.section-title{
+    text-align:center;
+    margin:90px 0 50px;
+}
+
+.section-title h2{
+    font-size:38px;
+    margin-bottom:12px;
+}
+
+.section-title p{
+    color:var(--text-light);
+    font-size:16px;
+}
+
+/*======================================
+RELATIONSHIP JOURNAL
+======================================*/
+
+#journal{
+    padding:20px 0;
+}
+
+.journal-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
+}
+
+.journal-card{
+    padding:28px;
+    background:var(--card);
+    border-radius:var(--radius-xl);
+    box-shadow:var(--outer);
+    transition:var(--transition);
+}
+
+.journal-card:hover{
+    transform:translateY(-8px);
+}
+
+.journal-icon{
+    width:70px;
+    height:70px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:20px;
+    border-radius:20px;
+    background:var(--bg);
+    box-shadow:var(--inset);
+}
+
+.journal-icon i{
+    font-size:28px;
+    color:var(--color);
+}
+
+.journal-card h3{
+    margin-bottom:12px;
+    font-size:22px;
+}
+
+.journal-card p{
+    color:var(--text-light);
+    line-height:1.8;
+    margin-bottom:20px;
+}
+
+.tag{
+    display:inline-block;
+    padding:8px 18px;
+    border-radius:50px;
+    color:#fff;
+    background:var(--gradient);
+    font-size:13px;
+    font-weight:600;
+}
+
+/*======================================
+OUR TIMELINE
+======================================*/
+
+#timeline{
+    padding:20px 0;
+}
+
+.timeline{
+    position:relative;
+    margin:70px 0;
+}
+
+.timeline::before{
+    content:"";
+    position:absolute;
+    left:50%;
+    top:0;
+    transform:translateX(-50%);
+    width:4px;
+    height:100%;
+    border-radius:20px;
+    background:var(--gradient);
+}
+
+.timeline-item{
+    position:relative;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin:55px 0;
+}
+
+.timeline-item:nth-child(even){
+    flex-direction:row-reverse;
+}
+
+.timeline-content{
+    width:43%;
+    padding:28px;
+    background:var(--card);
+    border-radius:var(--radius-xl);
+    box-shadow:var(--outer);
+    transition:var(--transition);
+}
+
+.timeline-content:hover{
+    transform:translateY(-8px);
+}
+
+.timeline-content h3{
+    margin-bottom:12px;
+}
+
+.timeline-content p{
+    color:var(--text-light);
+    line-height:1.8;
+}
+
+.timeline-dot{
+    position:absolute;
+    left:50%;
+    top:50%;
+    width:24px;
+    height:24px;
+    border-radius:50%;
+    transform:translate(-50%,-50%);
+    background:var(--gradient);
+    box-shadow:0 0 20px rgba(255,105,180,.45);
+}
+
+.timeline-date{
+    width:43%;
+    text-align:center;
+    color:var(--color);
+    font-size:18px;
+    font-weight:700;
+}
+
+/*======================================
+ANNIVERSARY COUNTDOWN
+======================================*/
+
+#countdown{
+    padding:20px 0;
+}
+
+.countdown-box{
+    padding:40px;
+    text-align:center;
+    background:var(--card);
+    border-radius:var(--radius-xl);
+    box-shadow:var(--outer);
+}
+
+.countdown-box h2{
+    font-size:34px;
+    margin-bottom:10px;
+}
+
+.countdown-box p{
+    margin-bottom:35px;
+    color:var(--text-light);
+}
+
+.count-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+}
+
+.count-item{
+    padding:25px;
+    border-radius:var(--radius-lg);
+    background:var(--bg);
+    box-shadow:var(--inset);
+}
+
+.count-item h1{
+    font-size:46px;
+    margin-bottom:10px;
+    color:var(--color);
+}
+
+.count-item span{
+    color:var(--text-light);
+    font-weight:600;
+}
+
+/*======================================
+MEMORY GALLERY
+======================================*/
+
+#gallery{
+    padding:20px 0;
+}
+
+.gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
+}
+
+.gallery-item{
+    overflow:hidden;
+    position:relative;
+    border-radius:var(--radius-xl);
+    background:var(--card);
+    box-shadow:var(--outer);
+    transition:var(--transition);
+    cursor:pointer;
+}
+
+.gallery-item:hover{
+    transform:translateY(-8px);
+}
+
+.gallery-item img{
+    height:280px;
+    transition:.5s;
+}
+
+.gallery-item:hover img{
+    transform:scale(1.08);
+}
+
+.overlay{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(0,0,0,.35);
+    opacity:0;
+    transition:var(--transition);
+}
+
+.gallery-item:hover .overlay{
+    opacity:1;
+}
+
+.overlay i{
+    color:#fff;
+    font-size:36px;
+}
+
+.caption{
+    padding:18px;
+}
+
+.caption h3{
+    margin-bottom:8px;
+}
+
+.caption p{
+    color:var(--text-light);
+    line-height:1.7;
+}
+
+.lightbox{
+    position:fixed;
+    inset:0;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    background:rgba(0,0,0,.85);
+    z-index:9999;
+}
+
+.lightbox.active{
+    display:flex;
+}
+
+.lightbox img{
+    max-width:90%;
+    max-height:90%;
+    border-radius:var(--radius-xl);
+}
+
+.close-lightbox{
+    position:absolute;
+    top:25px;
+    right:35px;
+    color:#fff;
+    font-size:40px;
+    cursor:pointer;
+}
+
+/*======================================
+PLACES
+======================================*/
+
+#places{
+    padding:20px 0;
+}
+
+.place-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:30px;
+}
+
+.place-card{
+    padding:25px;
+    background:var(--card);
+    border-radius:var(--radius-xl);
+    box-shadow:var(--outer);
+    transition:var(--transition);
+}
+
+.place-card:hover{
+    transform:translateY(-8px);
+}
+
+.place-card img{
+    height:220px;
+    border-radius:var(--radius-lg);
+    margin-bottom:20px;
+}
+
+.place-card h3{
+    font-size:22px;
+    margin-bottom:12px;
+}
+
+.place-card p{
+    color:var(--text-light);
+    line-height:1.8;
+}
+
+
+/*======================================
+LOVE LETTER
+======================================*/
+
+.love-letter{
+    margin:90px 0;
+}
+
+.envelope{
+    max-width:700px;
+    margin:auto;
+    padding:40px;
+    text-align:center;
+    background:var(--card);
+    border-radius:var(--radius-xl);
+    box-shadow:var(--outer);
+}
+
+.envelope h2{
+    margin-bottom:20px;
+    font-size:34px;
+    color:var(--color);
+}
+
+.envelope p{
+    margin-bottom:15px;
+    line-height:2;
+    color:var(--text-light);
+}
+
+/*======================================
+PLAYLIST & WISHLIST
+======================================*/
+
+#playlist,
+#wishlist{
+    padding:20px 0;
+}
+
+.music-card,
+.wishlist-card{
+    padding:30px;
+    background:var(--card);
+    border-radius:var(--radius-xl);
+    box-shadow:var(--outer);
+}
+
+.music-card iframe{
+    width:100%;
+    height:380px;
+    margin-top:20px;
+    border:0;
+    border-radius:var(--radius-lg);
+}
+
+.wishlist-list{
+    display:grid;
+    gap:20px;
+    margin-top:25px;
+}
+
+.wish{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:18px 20px;
+    background:var(--bg);
+    border-radius:var(--radius-lg);
+    box-shadow:var(--inset);
+}
+
+.wish-left{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.wish-left i{
+    font-size:22px;
+    color:var(--color);
+}
+
+.wish h4{
+    margin-bottom:5px;
+}
+
+.wish small{
+    color:var(--text-light);
+}
+
+.progress{
+    width:180px;
+    height:10px;
+    overflow:hidden;
+    background:#ddd;
+    border-radius:50px;
+}
+
+.progress span{
+    display:block;
+    height:100%;
+    border-radius:50px;
+    background:var(--gradient);
+}
+
+
+/*======================================
+PREMIUM DASHBOARD
+======================================*/
+
+.dashboard-premium{
+    padding:20px 0;
+}
+
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:25px;
+    margin-top:40px;
+}
+
+.stat-card{
+    padding:30px;
+    text-align:center;
+    background:var(--card);
+    border-radius:var(--radius-xl);
+    box-shadow:var(--outer);
+    transition:var(--transition);
+}
+
+.stat-card:hover{
+    transform:translateY(-10px);
+}
+
+.stat-card i{
+    font-size:38px;
+    margin-bottom:18px;
+    color:var(--color);
+}
+
+.stat-card h2{
+    font-size:40px;
+    margin-bottom:8px;
+}
+
+.stat-card p{
+    color:var(--text-light);
+}
+
+
+/*======================================
+PROGRESS AREA
+======================================*/
+
+.progress-area{
+    margin:60px 0;
+    padding:35px;
+    background:var(--card);
+    border-radius:var(--radius-xl);
+    box-shadow:var(--outer);
+}
+
+.progress-item{
+    margin:25px 0;
+}
+
+.progress-item h4{
+    margin-bottom:12px;
+}
+
+.bar{
+    height:14px;
+    overflow:hidden;
+    background:#dde3ef;
+    border-radius:50px;
+}
+
+.bar span{
+    display:block;
+    height:100%;
+    border-radius:50px;
+    background:var(--gradient);
+}
+
+/*======================================
+RELATIONSHIP ANALYTICS
+======================================*/
+
+.analytics{
+    padding:20px 0;
+}
+
+.analytics-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:30px;
+}
+
+.chart-card,
+.side-card{
+    padding:30px;
+    background:var(--card);
+    border-radius:var(--radius-xl);
+    box-shadow:var(--outer);
+}
+
+.chart-card h3,
+.side-card h3{
+    margin-bottom:25px;
+}
+
+canvas{
+    width:100%!important;
+    height:350px!important;
+}
+
+
+/*======================================
+LOVE QUOTE
+======================================*/
+
+.quote{
+    margin-top:25px;
+    padding:20px;
+    border-left:5px solid var(--color);
+    border-radius:var(--radius);
+    background:rgba(255,166,254,.12);
+    color:var(--text-light);
+    font-style:italic;
+}
+
+.quote h2{
+    margin-bottom:15px;
+    color:var(--color);
+}
+
+
+/*======================================
+MOOD TRACKER
+======================================*/
+
+.mood-list{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+.mood{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 18px;
+    background:var(--bg);
+    border-radius:var(--radius-lg);
+    box-shadow:var(--inset);
+}
+
+.mood strong{
+    color:var(--color);
+}
+
+
+/*======================================
+BADGES
+======================================*/
+
+.badges{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+    margin-top:25px;
+}
+
+.badge{
+    padding:18px;
+    text-align:center;
+    background:var(--bg);
+    border-radius:var(--radius-lg);
+    box-shadow:var(--inset);
+}
+
+/* FOOTER */
+footer{
+    margin-top:120px;
+    padding:60px 0;
+    text-align:center;
+    background:var(--card);
+    box-shadow:0 -10px 20px rgba(0,0,0,.05);
+}
+footer h2{
+    color:var(--color);
+}
+footer p{
+    color:var(--text-light);
+    margin-top:15px;
+}
+.social{
+    display:flex;
+    justify-content:center;
+    gap:18px;
+    margin:25px 0;
+}
+.social a{
+    width:55px;
+    height:55px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    background:var(--bg);
+    box-shadow:var(--outer);
+    font-size:22px;
+    transition:var(--transition);
+}
+.social a:hover{
+    color:var(--color);
+    transform:translateY(-6px);
+}
+
+/* RESPONSIVE */
+@media(max-width:992px){
+    .hero-grid,
+    .analytics-grid,
+    .place-grid{
+        grid-template-columns:1fr;
+    }
+
+    .dashboard,
+    .stats-grid,
+    .gallery-grid,
+    .journal-grid,
+    .count-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .timeline::before{
+        left:25px;
+    }
+
+    .timeline-item,
+    .timeline-item:nth-child(even){
+        flex-direction:column;
+        align-items:flex-start;
+        padding-left:60px;
+    }
+
+    .timeline-content,
+    .timeline-date{
+        width:100%;
+        text-align:left;
+    }
+
+    .timeline-dot{
+        left:25px;
+    }
+}
+
+@media(max-width:768px){
+    .hero-content h1{
+        font-size:40px;
+    }
+
+    .dashboard,
+    .stats-grid,
+    .gallery-grid,
+    .journal-grid,
+    .count-grid{
+        grid-template-columns:1fr;
+    }
+
+    .wish{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:15px;
+    }
+
+    .progress{
+        width:100%;
+    }
+
+    .music-card iframe{
+        height:280px;
+    }
+}
+
+</style>
+</head>
+<body>
+
+<section class="hero">
+    <div class="container hero-grid">
+        <div class="hero-content">
+            <h1>Every Love Story Deserves a Beautiful Journal.</h1>
+            <p>Semua kenangan, perjalanan, dan cerita cinta tersimpan dalam satu tempat yang elegan.</p>
+            <a href="#" class="button">Start Visit</a>
+        </div>
+
+        <div class="photo">
+            <img src="https://picsum.photos/700/700?random=1" alt="Our Story">
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="dashboard">
+            <div class="card">
+                <i class="fa-solid fa-book-open"></i>
+                <h2>86</h2>
+                <span>Journal</span>
+            </div>
+
+            <div class="card">
+                <i class="fa-solid fa-camera"></i>
+                <h2>420</h2>
+                <span>Photos</span>
+            </div>
+
+            <div class="card">
+                <i class="fa-solid fa-location-dot"></i>
+                <h2>18</h2>
+                <span>Places</span>
+            </div>
+
+            <div class="card">
+                <i class="fa-solid fa-heart"></i>
+                <h2>1,245</h2>
+                <span>Likes</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="journal">
+    <div class="container">
+        <div class="section-title">
+            <h2>
+                <i class="fa-solid fa-people-arrows"></i>
+                Relationship Journal
+            </h2>
+            <p>Semua cerita indah tersimpan dalam satu tempat.</p>
+        </div>
+
+        <div class="journal-grid">
+            <div class="journal-card">
+                <div class="journal-icon">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <h3>First Meeting</h3>
+                <p>Hari pertama kita bertemu menjadi awal dari perjalanan yang tidak pernah aku bayangkan sebelumnya.</p>
+                <span class="tag">Memory</span>
+            </div>
+
+            <div class="journal-card">
+                <div class="journal-icon">
+                    <i class="fa-solid fa-book-open"></i>
+                </div>
+                <h3>Daily Journal</h3>
+                <p>Catatan kecil setiap hari, mulai dari hal sederhana hingga momen yang ingin dikenang selamanya.</p>
+                <span class="tag">Diary</span>
+            </div>
+
+            <div class="journal-card">
+                <div class="journal-icon">
+                    <i class="fa-solid fa-camera-retro"></i>
+                </div>
+                <h3>Special Memories</h3>
+                <p>Foto, cerita, dan kenangan yang membuat setiap perjalanan terasa lebih berarti.</p>
+                <span class="tag">Gallery</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="timeline">
+    <div class="container">
+        <div class="section-title">
+            <h2>
+                <i class="fa-solid fa-calendar-days"></i>
+                Our Timeline
+            </h2>
+            <p>Perjalanan kecil yang menjadi cerita besar.</p>
+        </div>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>First Meet</h3>
+                    <p>Hari ketika dua orang asing mulai saling mengenal dan tanpa sadar mengubah hidup satu sama lain.</p>
+                </div>
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">26 May 2026</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>First Date</h3>
+                    <p>Secangkir kopi, obrolan panjang, dan senyum yang membuat waktu terasa berjalan lebih cepat.</p>
+                </div>
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">27 June 2026</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>Official Couple</h3>
+                    <p>Hari ketika perjalanan ini memiliki nama, komitmen, dan harapan untuk terus berjalan bersama.</p>
+                </div>
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">29 May 2026</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="countdown">
+    <div class="container">
+        <div class="countdown">
+            <div class="countdown-box">
+                <h2>
+                    <i class="fa-solid fa-heart"></i>
+                    Anniversary Countdown
+                </h2>
+                <p>Menghitung waktu menuju hari spesial berikutnya.</p>
+
+                <div class="count-grid">
+                    <div class="count-item">
+                        <h1 id="days">00</h1>
+                        <span>Hari</span>
+                    </div>
+
+                    <div class="count-item">
+                        <h1 id="hours">00</h1>
+                        <span>Jam</span>
+                    </div>
+
+                    <div class="count-item">
+                        <h1 id="minutes">00</h1>
+                        <span>Menit</span>
+                    </div>
+
+                    <div class="count-item">
+                        <h1 id="seconds">00</h1>
+                        <span>Detik</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="gallery">
+    <div class="container">
+        <div class="section-title">
+            <h2>
+                <i class="fa-solid fa-camera"></i>
+                Memory Gallery
+            </h2>
+            <p>Setiap foto menyimpan cerita yang tak tergantikan.</p>
+        </div>
+
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://picsum.photos/600/700?random=10" alt="First Vacation">
+                <div class="overlay">
+                    <i class="fa-solid fa-expand"></i>
+                </div>
+                <div class="caption">
+                    <h3>First Vacation</h3>
+                    <p>Liburan pertama yang penuh tawa dan cerita.</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="https://picsum.photos/600/700?random=11" alt="Sunset Together">
+                <div class="overlay">
+                    <i class="fa-solid fa-expand"></i>
+                </div>
+                <div class="caption">
+                    <h3>Sunset Together</h3>
+                    <p>Matahari terbenam selalu lebih indah saat bersama.</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="https://picsum.photos/600/700?random=12" alt="Coffee Date">
+                <div class="overlay">
+                    <i class="fa-solid fa-expand"></i>
+                </div>
+                <div class="caption">
+                    <h3>Coffee Date</h3>
+                    <p>Obrolan sederhana yang menjadi kenangan luar biasa.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="lightbox" id="lightbox">
+        <span class="close-lightbox">&times;</span>
+        <img id="preview" alt="Preview Image">
+    </div>
+</section>
+
+<section id="places">
+    <div class="container">
+        <div class="section-title">
+            <h2>
+                <i class="fa-solid fa-map-location-dot"></i>
+                Places We Visited
+            </h2>
+            <p>Tempat-tempat yang menjadi saksi perjalanan kita.</p>
+        </div>
+
+        <div class="place-grid">
+            <div class="place-card">
+                <img src="https://picsum.photos/700/450?random=20" alt="First Coffee Shop">
+                <h3>First Coffee Shop</h3>
+                <p>Tempat sederhana tempat obrolan pertama berubah menjadi cerita yang tidak pernah selesai.</p>
+            </div>
+
+            <div class="place-card">
+                <img src="https://picsum.photos/700/450?random=21" alt="Favorite Beach">
+                <h3>Favorite Beach</h3>
+                <p>Suara ombak, angin sore, dan senja yang selalu mengingatkan bahwa rumah bukan hanya sebuah tempat.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="playlist">
+    <div class="container">
+        <div class="section-title">
+            <h2>
+                <i class="fa-solid fa-music"></i>
+                Our Playlist
+            </h2>
+            <p>Lagu-lagu yang menemani perjalanan kita.</p>
+        </div>
+
+        <div class="music-card">
+            <iframe
+                src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M"
+                loading="lazy"
+                allowfullscreen>
+            </iframe>
+        </div>
+    </div>
+</section>
+
+<section id="wishlist">
+    <div class="container">
+        <div class="section-title">
+            <h2>
+                <i class="fa-solid fa-gift"></i>
+                Dream Wishlist
+            </h2>
+            <p>Hal-hal yang ingin kita lakukan bersama.</p>
+        </div>
+
+        <div class="wishlist-card">
+            <div class="wishlist-list">
+
+                <div class="wish">
+                    <div class="wish-left">
+                        <i class="fa-solid fa-plane"></i>
+                        <div>
+                            <h4>Trip ke Jepang</h4>
+                            <small>Target 2027</small>
+                        </div>
+                    </div>
+                    <div class="progress">
+                        <span style="width:45%"></span>
+                    </div>
+                </div>
+
+                <div class="wish">
+                    <div class="wish-left">
+                        <i class="fa-solid fa-camera"></i>
+                        <div>
+                            <h4>Prewedding Photoshoot</h4>
+                            <small>Planning</small>
+                        </div>
+                    </div>
+                    <div class="progress">
+                        <span style="width:70%"></span>
+                    </div>
+                </div>
+
+                <div class="wish">
+                    <div class="wish-left">
+                        <i class="fa-solid fa-house"></i>
+                        <div>
+                            <h4>Rumah Impian</h4>
+                            <small>Future Goal</small>
+                        </div>
+                    </div>
+                    <div class="progress">
+                        <span style="width:25%"></span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="dashboard-premium">
+    <div class="container">
+        <div class="section-title">
+            <h2>
+                <i class="fa-solid fa-chart-line"></i>
+                Relationship Dashboard
+            </h2>
+            <p>Ringkasan perjalanan dan pencapaian hubungan kita.</p>
+        </div>
+
+        <div class="progress-area">
+            <div class="progress-item">
+                <h4><i class="fa-solid fa-heart"></i> Love Progress</h4>
+                <div class="bar">
+                    <span style="width:98%"></span>
+                </div>
+            </div>
+
+            <div class="progress-item">
+                <h4><i class="fa-solid fa-plane"></i> Traveling Goals</h4>
+                <div class="bar">
+                    <span style="width:65%"></span>
+                </div>
+            </div>
+
+            <div class="progress-item">
+                <h4><i class="fa-solid fa-house"></i> Future Dreams</h4>
+                <div class="bar">
+                    <span style="width:42%"></span>
+                </div>
+            </div>
+
+            <div class="progress-item">
+                <h4><i class="fa-solid fa-book-open"></i> Journal Completion</h4>
+                <div class="bar">
+                    <span style="width:88%"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="analytics">
+    <div class="container">
+        <div class="section-title">
+            <h2>
+                <i class="fa-solid fa-chart-column"></i>
+                Relationship Analytics
+            </h2>
+            <p>Statistik perjalanan cinta dari waktu ke waktu.</p>
+        </div>
+
+        <div class="analytics-grid">
+            <div class="chart-card">
+                <h3>Monthly Memories</h3>
+                <canvas id="loveChart"></canvas>
+
+                <div class="quote">
+                    <h2>Love Letter</h2>
+
+                    <p>Terima kasih telah menjadi bagian terindah dalam setiap langkah hidupku, tidak semua hari sempurna, tetapi setiap hari bersamamu selalu memiliki alasan untuk disyukuri.</p>
+                    
+                </div>
+            </div>
+
+            <div class="side-card">
+                <h3>
+                    <i class="fa-solid fa-face-smile"></i>
+                    Mood Tracker
+                </h3>
+
+                <div class="mood-list">
+                    <div class="mood">
+                        <span>Kebahagiaan</span>
+                        <strong>95%</strong>
+                    </div>
+
+                    <div class="mood">
+                        <span>Keromantisan</span>
+                        <strong>90%</strong>
+                    </div>
+
+                    <div class="mood">
+                        <span>Keseruan</span>
+                        <strong>88%</strong>
+                    </div>
+
+                    <div class="mood">
+                        <span>Kenyamanan</span>
+                        <strong>93%</strong>
+                    </div>
+                </div>
+
+                <div class="badges">
+                    <div class="badge">Days</div>
+                    <div class="badge">Traveler</div>
+                    <div class="badge">Photos</div>
+                    <div class="badge">Soulmate</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <h2>Our Story</h2>
+    <p>Every moment deserves to be remembered.</p>
+
+    <div class="social">
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#"><i class="fa-brands fa-spotify"></i></a>
+        <a href="#"><i class="fa-brands fa-youtube"></i></a>
+        <a href="#"><i class="fa-brands fa-github"></i></a>
+    </div>
+
+    <p>&copy; 2026 Relationship Journal Premium</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+const ctx = document.getElementById("loveChart");
+
+new Chart(ctx, {
+    type: "line",
+    data: {
+        labels: ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu"],
+        datasets: [{
+            label: "Memories",
+            data: [8, 12, 10, 15, 18, 20, 24, 28],
+            fill: true,
+            borderWidth: 3,
+            borderColor: "#ff7aa2",
+            backgroundColor: "rgba(255,122,162,.15)",
+            tension: .4
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                display: false
+            }
+        }
+    }
+});
+</script>
+
+<script>
+const month = 4; // Mei (0 = Januari)
+const day = 29;
+
+function getTargetDate() {
+    const now = new Date();
+    let year = now.getFullYear();
+
+    let target = new Date(year, month, day, 0, 0, 0);
+
+    if (target < now) {
+        target = new Date(year + 1, month, day, 0, 0, 0);
+    }
+
+    return target;
+}
+
+setInterval(() => {
+    const now = Date.now();
+    const targetDate = getTargetDate().getTime();
+    const distance = targetDate - now;
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById("days").textContent = days;
+    document.getElementById("hours").textContent = hours;
+    document.getElementById("minutes").textContent = minutes;
+    document.getElementById("seconds").textContent = seconds;
+}, 1000);
+</script>
+
+
+<script>
+const galleryImages = document.querySelectorAll(".gallery-item img");
+const lightbox = document.getElementById("lightbox");
+const preview = document.getElementById("preview");
+
+galleryImages.forEach(img => {
+    img.onclick = () => {
+        lightbox.classList.add("active");
+        preview.src = img.src;
+    };
+});
+
+lightbox.onclick = () => {
+    lightbox.classList.remove("active");
+};
+</script>
+
+<script>
+
+/* Scroll Reveal */
+const reveal = () => {
+    document.querySelectorAll(
+        "section,.card,.journal-card,.gallery-item,.place-card,.stat-card"
+    ).forEach(el => {
+        const top = el.getBoundingClientRect().top;
+
+        if (top < window.innerHeight - 100) {
+            el.style.opacity = "1";
+            el.style.transform = "translateY(0)";
+        }
+    });
+};
+
+document.querySelectorAll(
+    "section,.card,.journal-card,.gallery-item,.place-card,.stat-card"
+).forEach(el => {
+    el.style.opacity = "0";
+    el.style.transform = "translateY(40px)";
+    el.style.transition = ".7s";
+});
+
+window.addEventListener("scroll", reveal);
+reveal();
+</script>
+
+</body>
+</html>
