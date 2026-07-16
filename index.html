@@ -669,10 +669,10 @@ PLAYLIST & WISHLIST
 
 
 /*======================================
-PREMIUM DASHBOARD
+PREMIUM PROGRESS 
 ======================================*/
 
-.dashboard-premium{
+.progress-premium{
     padding:20px 0;
 }
 
@@ -881,6 +881,38 @@ footer p{
     box-shadow:var(--inset);
 }
 
+.love-rain{
+    position:fixed;
+    top:-30px;
+    pointer-events:none;
+    z-index:9999;
+    will-change:transform,opacity;
+    animation:loveFall linear forwards;
+}
+
+@keyframes loveFall{
+    0%{
+        transform:translate(0,-50px) rotate(0deg);
+        opacity:0;
+    }
+    10%{
+        opacity:1;
+    }
+    25%{
+        transform:translate(-30px,25vh) rotate(120deg);
+    }
+    50%{
+        transform:translate(35px,50vh) rotate(260deg);
+    }
+    75%{
+        transform:translate(-25px,75vh) rotate(420deg);
+    }
+    100%{
+        transform:translate(20px,110vh) rotate(720deg);
+        opacity:0;
+    }
+}
+
 /* RESPONSIVE */
 @media(max-width:992px){
     .hero-grid,
@@ -888,11 +920,16 @@ footer p{
     .place-grid{
         grid-template-columns:1fr;
     }
+    
+    .journal-grid,
+    .gallery-grid{
+       display:grid;
+       grid-template-columns:repeat(3,1fr);
+       gap:25px;
+    }
 
     .dashboard,
     .stats-grid,
-    .gallery-grid,
-    .journal-grid,
     .count-grid{
         grid-template-columns:repeat(2,1fr);
     }
@@ -920,6 +957,15 @@ footer p{
 }
 
 @media (max-width:768px){
+    .journal-grid,
+    .gallery-grid{
+        grid-template-columns:1fr;
+        gap:20px;
+    }
+
+    .gallery-item img{
+        height:240px;
+    }
 
     html{
         font-size:14px;
@@ -1000,7 +1046,7 @@ footer p{
         <div class="hero-content">
             <h1>Every Love Story Deserves a Beautiful Journal.</h1>
             <p>Semua kenangan, perjalanan, dan cerita cinta tersimpan dalam satu tempat yang elegan.</p>
-            <a href="#" class="button">Start Visit</a>
+            <a href="#" class="button" id="loveBtn">Start Visit</a>
         </div>
 
         <div class="photo">
@@ -1121,17 +1167,16 @@ footer p{
 
 <section id="countdown">
     <div class="container">
+        <div class="section-title">
+            <h2>
+                <i class="fa-solid fa-heart"></i>
+                Anniversary Countdown
+            </h2>
+            <p>Menghitung waktu menuju hari spesial berikutnya.</p>
+        </div>
+        
        <div class="countdown">
-          <div class="countdown-box">
-             
-            <div class="section-title">
-                <h2>
-                    <i class="fa-solid fa-heart"></i>
-                    Anniversary Countdown
-                </h2>
-                <p>Menghitung waktu menuju hari spesial berikutnya.</p>
-            </div>
-
+          <div class="countdown-box">                     
                 <div class="count-grid">
                     <div class="count-item">
                         <h1 id="days">00</h1>
@@ -1313,11 +1358,11 @@ footer p{
     </div>
 </section>
 
-<section class="dashboard-premium">
+<section class="progress-premium">
     <div class="container">
         <div class="section-title">
             <h2>
-                <i class="fa-solid fa-chart-line"></i>
+                <i class="fa-solid fa-chart-column"></i>
                 Relationship Dashboard
             </h2>
             <p>Ringkasan perjalanan dan pencapaian hubungan kita.</p>
@@ -1359,7 +1404,7 @@ footer p{
     <div class="container">
         <div class="section-title">
             <h2>
-                <i class="fa-solid fa-chart-column"></i>
+                <i class="fa-solid fa-chart-line"></i>
                 Relationship Analytics
             </h2>
             <p>Statistik perjalanan cinta dari waktu ke waktu.</p>
@@ -1562,7 +1607,6 @@ lightbox.onclick = () => {
 </script>
 
 <script>
-
 /* Scroll Reveal */
 const reveal = () => {
     document.querySelectorAll(
@@ -1587,6 +1631,35 @@ document.querySelectorAll(
 
 window.addEventListener("scroll", reveal);
 reveal();
+
+const loveBtn=document.getElementById("loveBtn");
+
+loveBtn.addEventListener("click",e=>{
+    e.preventDefault();
+
+    const emoji=["💞","💕","💖","💗","🎀","💓","🌺","💘"];
+
+    for(let i=0;i<100;i++){
+
+        setTimeout(()=>{
+
+            const love=document.createElement("span");
+            love.className="love-rain";
+
+            love.textContent=emoji[Math.floor(Math.random()*emoji.length)];
+
+            love.style.left=Math.random()*100+"vw";
+            love.style.fontSize=(16+Math.random()*18)+"px";
+            love.style.animationDuration=(3+Math.random()*2)+"s";
+
+            document.body.appendChild(love);
+
+            love.addEventListener("animationend",()=>love.remove());
+
+        },i*70);
+
+    }
+});
 </script>
 
 </body>
