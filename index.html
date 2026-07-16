@@ -28,19 +28,11 @@ ROOT & RESET
 ======================================*/
 
 :root{
-    --color-1:#ffa6fe;
-    --color-2:#d5a6ff;
-    --color-3:#a9a6ff;
-    --color-4:#a6bcff;
-    --color-5:#bfa6ff;
 
-    --color:var(--color-1);
-    --gradient:linear-gradient(125deg,#6c5ce7,#ff69b4);
-
-    --bg:#16181d;
-    --card:#1f222a;
-    --text:#f2f2f2;
-    --text-light:#aaa;
+    --bg:linear-gradient(125deg,#6c5ce7,#ff69b4);
+    --card:linear-gradient(125deg,#6c5ce7,#ff69b4);
+    --text:#fff;
+    --text-light:rgba(255,255,255,.75);
     --white:#fff;
 
     --font:"Georgia",sans-serif;
@@ -79,6 +71,23 @@ body{
     background:var(--bg);
     color:var(--text);
     overflow-x:hidden;
+}
+
+body,
+h1,h2,h3,h4,h5,h6,
+p,span,small,a,
+i{
+    color:#fff;
+}
+
+.card i,
+.journal-icon i,
+.wish-left i,
+.stat-card i,
+.mood strong,
+.timeline-date,
+footer h2{
+    color:#fff;
 }
 
 img{
@@ -123,22 +132,6 @@ HERO
     line-height:1.8;
     color:var(--text-light);
     margin-bottom:30px;
-}
-
-.button{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    padding:15px 35px;
-    border-radius:50px;
-    color:var(--white);
-    background:var(--gradient);
-    box-shadow:var(--outer);
-    transition:var(--transition);
-}
-
-.button:hover{
-    transform:translateY(-5px);
 }
 
 .photo{
@@ -226,15 +219,13 @@ RELATIONSHIP JOURNAL
 }
 
 .journal-card{
+    display:flex;
+    flex-direction:column;
     padding:28px;
     background:var(--card);
     border-radius:var(--radius-xl);
     box-shadow:var(--outer);
     transition:var(--transition);
-}
-
-.journal-card:hover{
-    transform:translateY(-8px);
 }
 
 .journal-icon{
@@ -265,14 +256,35 @@ RELATIONSHIP JOURNAL
     margin-bottom:20px;
 }
 
+.button,
 .tag{
-    display:inline-block;
-    padding:8px 18px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
     border-radius:50px;
     color:#fff;
-    background:var(--gradient);
-    font-size:13px;
+    background:var(--bg);
+    box-shadow:var(--outer);
     font-weight:600;
+    transition:var(--transition);
+}
+
+.button{
+    padding:15px 35px;
+    font-size:15px;
+}
+
+
+.tag{
+    margin-top:auto;
+    align-self:flex-start;
+    padding:8px 18px;
+    font-size:13px;
+}
+
+.button:active,
+.tag:active{
+    box-shadow:var(--inset);
 }
 
 /*======================================
@@ -293,11 +305,12 @@ OUR TIMELINE
     position:absolute;
     left:50%;
     top:0;
-    transform:translateX(-50%);
-    width:4px;
+    width:8px;
     height:100%;
-    border-radius:20px;
+    border-radius:50px;
     background:var(--gradient);
+    box-shadow:var(--outer);
+    transition:.3s ease;
 }
 
 .timeline-item{
@@ -342,8 +355,8 @@ OUR TIMELINE
     height:24px;
     border-radius:50%;
     transform:translate(-50%,-50%);
-    background:var(--gradient);
-    box-shadow:0 0 20px rgba(255,105,180,.45);
+    box-shadow:var(--outer);
+    background:var(--bg);
 }
 
 .timeline-date{
@@ -352,6 +365,7 @@ OUR TIMELINE
     color:var(--color);
     font-size:18px;
     font-weight:700;
+    margin-top: 15px;
 }
 
 /*======================================
@@ -642,13 +656,15 @@ PLAYLIST & WISHLIST
     overflow:hidden;
     background:#ddd;
     border-radius:50px;
+    box-shadow:var(--inset);
 }
 
 .progress span{
     display:block;
     height:100%;
     border-radius:50px;
-    background:var(--gradient);
+    background:#ff69b4;
+    box-shadow:var(--inset);
 }
 
 
@@ -719,15 +735,17 @@ PROGRESS AREA
 .bar{
     height:14px;
     overflow:hidden;
-    background:#dde3ef;
+    background:#ddd;
     border-radius:50px;
+    box-shadow:var(--inset);
 }
 
 .bar span{
     display:block;
     height:100%;
     border-radius:50px;
-    background:var(--gradient);
+    background:#ff69b4;
+    box-shadow:var(--inset);
 }
 
 /*======================================
@@ -773,6 +791,7 @@ LOVE QUOTE
     border-left:5px solid var(--color);
     border-radius:var(--radius);
     background:rgba(255,166,254,.12);
+    box-shadow:var(--inset);
     color:var(--text-light);
     font-style:italic;
 }
@@ -832,8 +851,6 @@ footer{
     margin-top:120px;
     padding:60px 0;
     text-align:center;
-    background:var(--card);
-    box-shadow:0 -10px 20px rgba(0,0,0,.05);
 }
 footer h2{
     color:var(--color);
@@ -860,9 +877,8 @@ footer p{
     font-size:22px;
     transition:var(--transition);
 }
-.social a:hover{
-    color:var(--color);
-    transform:translateY(-6px);
+.social a:active{
+    box-shadow:var(--inset);
 }
 
 /* RESPONSIVE */
@@ -903,31 +919,75 @@ footer p{
     }
 }
 
-@media(max-width:768px){
+@media (max-width:768px){
+
+    html{
+        font-size:14px;
+    }
+
+    .hero{
+        padding:110px 0 40px;
+    }
+
     .hero-content h1{
-        font-size:40px;
+        font-size:2.2rem;
+        line-height:1.2;
     }
 
-    .dashboard,
-    .stats-grid,
-    .gallery-grid,
-    .journal-grid,
-    .count-grid{
-        grid-template-columns:1fr;
+    .hero-content p{
+        font-size:.95rem;
     }
 
-    .wish{
-        flex-direction:column;
-        align-items:flex-start;
-        gap:15px;
+    .section-title{
+        margin:60px 0 30px;
     }
 
-    .progress{
-        width:100%;
+    .section-title h2{
+        font-size:1.8rem;
     }
 
-    .music-card iframe{
-        height:280px;
+    .section-title p{
+        font-size:.9rem;
+    }
+
+    .card,
+    .journal-card,
+    .timeline-content,
+    .place-card,
+    .music-card,
+    .wishlist-card,
+    .chart-card,
+    .side-card{
+        padding:20px;
+    }
+
+    .countdown-box,
+    .progress-area,
+    .envelope{
+        padding:25px;
+    }
+
+    .count-item h1{
+        font-size:2rem;
+    }
+
+    .timeline-date{
+        font-size:1rem;
+    }
+
+    .place-card h3,
+    .journal-card h3,
+    .caption h3{
+        font-size:1.2rem;
+    }
+
+    .button{
+        padding:12px 24px;
+        font-size:.9rem;
+    }
+
+    footer{
+        padding:40px 0;
     }
 }
 
@@ -1061,13 +1121,16 @@ footer p{
 
 <section id="countdown">
     <div class="container">
-        <div class="countdown">
-            <div class="countdown-box">
+       <div class="countdown">
+          <div class="countdown-box">
+             
+            <div class="section-title">
                 <h2>
                     <i class="fa-solid fa-heart"></i>
                     Anniversary Countdown
                 </h2>
                 <p>Menghitung waktu menuju hari spesial berikutnya.</p>
+            </div>
 
                 <div class="count-grid">
                     <div class="count-item">
@@ -1370,28 +1433,77 @@ footer p{
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<script>
-const ctx = document.getElementById("loveChart");
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-new Chart(ctx, {
-    type: "line",
-    data: {
-        labels: ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu"],
-        datasets: [{
-            label: "Memories",
-            data: [8, 12, 10, 15, 18, 20, 24, 28],
-            fill: true,
-            borderWidth: 3,
-            borderColor: "#ff7aa2",
-            backgroundColor: "rgba(255,122,162,.15)",
-            tension: .4
+<script>
+const ctx=document.getElementById("loveChart");
+
+new Chart(ctx,{
+    type:"line",
+    data:{
+        labels:["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu"],
+        datasets:[{
+            label:"Memories",
+            data:[8,12,10,15,18,20,24,28],
+            fill:true,
+            tension:.4,
+            borderWidth:3,
+            borderColor:"#fff",
+            backgroundColor:"rgba(255,255,255,.12)",
+            pointBackgroundColor:"#fff",
+            pointBorderColor:"#fff",
+            pointHoverBackgroundColor:"#fff",
+            pointHoverBorderColor:"#fff",
+            pointRadius:5,
+            pointHoverRadius:7
         }]
     },
-    options: {
-        responsive: true,
-        plugins: {
-            legend: {
-                display: false
+    options:{
+        responsive:true,
+        maintainAspectRatio:false,
+        plugins:{
+            legend:{
+                display:false
+            },
+            tooltip:{
+                backgroundColor:"#222",
+                titleColor:"#fff",
+                bodyColor:"#fff",
+                borderColor:"#fff",
+                borderWidth:1
+            }
+        },
+        scales:{
+            x:{
+                ticks:{
+                    color:"#fff",
+                    font:{
+                        size:13,
+                        weight:"600"
+                    }
+                },
+                grid:{
+                    color:"rgba(255,255,255,.12)"
+                },
+                border:{
+                    color:"rgba(255,255,255,.3)"
+                }
+            },
+            y:{
+                beginAtZero:true,
+                ticks:{
+                    color:"#fff",
+                    font:{
+                        size:13,
+                        weight:"600"
+                    }
+                },
+                grid:{
+                    color:"rgba(255,255,255,.12)"
+                },
+                border:{
+                    color:"rgba(255,255,255,.3)"
+                }
             }
         }
     }
@@ -1431,7 +1543,6 @@ setInterval(() => {
     document.getElementById("seconds").textContent = seconds;
 }, 1000);
 </script>
-
 
 <script>
 const galleryImages = document.querySelectorAll(".gallery-item img");
