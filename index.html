@@ -544,7 +544,7 @@ MEMORY GALLERY
     align-items:center;
     justify-content:center;
     background:rgba(0,0,0,.85);
-    z-index:9999;
+    z-index:999;
 }
 
 .lightbox.active{
@@ -934,7 +934,7 @@ footer p{
     position:fixed;
     top:-30px;
     pointer-events:none;
-    z-index:9999;
+    z-index:999;
     will-change:transform,opacity;
     animation:loveFall linear forwards;
 }
@@ -1182,14 +1182,14 @@ footer p{
 
 </style>
 </head>
-<body>
+<body oncontextmenu="return false;" oncopy="return false;" onselectstart="return false;">
 
 <section class="hero">
     <div class="container hero-grid">
         <div class="hero-content">
             <h1>Every Love Story Deserves a Beautiful Journal.</h1>
             <p>Semua kenangan, perjalanan, dan cerita cinta tersimpan dalam satu tempat yang elegan.</p>
-            <a href="#" class="button" id="loveBtn">Start Visit</a>
+            <a href="#" class="button" id="loveBtn">Click Here</a>
         </div>
 
         <div class="photo">
@@ -1981,6 +1981,17 @@ new Swiper(".heroSwiper",{
         prevEl:".swiper-button-prev"
     }
 });
+
+
+document.querySelectorAll('.button').forEach(el => {
+  el.addEventListener('mousedown', () => el.classList.add('pressed'));
+  el.addEventListener('mouseup', () => el.classList.remove('pressed'));
+  el.addEventListener('mouseleave', () => el.classList.remove('pressed'));
+});
+
+document.addEventListener("contextmenu", e => e.preventDefault());
+document.addEventListener("selectstart", e => e.preventDefault());
+document.addEventListener("copy", e => e.preventDefault());
 </script>
 
 </body>
