@@ -1015,10 +1015,6 @@ footer p{
     transition:var(--transition);
 }
 
-.cell:hover{
-    transform:translateY(-2px);
-}
-
 .cell:active{
     box-shadow:var(--inset);
 }
@@ -1982,6 +1978,43 @@ new Swiper(".heroSwiper",{
     }
 });
 
+const audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+
+function clickSound(){
+
+    if(audioCtx.state==="suspended"){
+        audioCtx.resume();
+    }
+
+    const osc=audioCtx.createOscillator();
+    const gain=audioCtx.createGain();
+
+    osc.type="triangle";
+    osc.frequency.value=700;
+
+    gain.gain.setValueAtTime(.08,audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(.0001,audioCtx.currentTime+.05);
+
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+
+    osc.start();
+    osc.stop(audioCtx.currentTime+.05);
+
+}
+
+document.addEventListener("click",e=>{
+
+    if(
+        e.target.closest(".button")||
+        e.target.closest(".tag")||
+        e.target.closest(".cell")||
+        e.target.closest(".social a")
+    ){
+        clickSound();
+    }
+
+});
 
 document.querySelectorAll('.button').forEach(el => {
   el.addEventListener('mousedown', () => el.classList.add('pressed'));
