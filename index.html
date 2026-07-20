@@ -5,10 +5,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Relationship Journal Premium</title>
+<title>Relationship Journal — Play together & Stay together</title>
 
 <meta name="description"
-content="Relationship Journal modern dengan timeline, gallery, love letter, playlist, anniversary countdown, dashboard dan wishlist.">
+content="Relationship Journal modern dengan games, timeline, gallery, love letter, playlist, anniversary countdown, dashboard dan wishlist.">
 
 <meta name="theme-color" content="#ff7aa2">
 
@@ -982,15 +982,6 @@ footer p{
     text-align:center;
 }
 
-.game-card h3{
-    margin-bottom:10px;
-}
-
-.game-card p{
-    margin-bottom:20px;
-    color:var(--text-light);
-}
-
 .tic-board{
     display:grid;
     grid-template-columns:repeat(3,90px);
@@ -1187,7 +1178,7 @@ footer p{
     box-shadow:var(--outer);
     border-radius:var(--radius-xl);
     background:var(--card);
-    padding:20px 40px;
+    padding:40px;
     gap:25px;
 }
 
@@ -1706,8 +1697,7 @@ footer p{
 
         <div class="games-grid">
             <div class="game-card">
-                <h3>TIC TAC TOE</h3>
-                <p>Play together & Stay together</p>
+                
                 <div id="ticBoard" class="tic-board"></div>
                 <button class="button" id="resetGame">
                     Reset Game
@@ -2082,7 +2072,7 @@ new Swiper(".heroSwiper",{
     }
 });
 
-const audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+const audioCtx=new(window.AudioContext||window.webkit.AudioContext)();
 
 function clickSound(){
 
@@ -2113,9 +2103,13 @@ document.addEventListener("click",e=>{
         e.target.closest(".button")||
         e.target.closest(".tag")||
         e.target.closest(".cell")||
-        e.target.closest(".social a")
+        e.target.closest(".social a")||
+        e.target.closest(".puzzle-btn button")||
+        e.target.closest(".tile")
     ){
+
         clickSound();
+
     }
 
 });
