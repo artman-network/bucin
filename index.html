@@ -1176,6 +1176,90 @@ footer p{
     }
 }
 
+#puzzle{
+    padding:80px 0;
+}
+
+.puzzle-box{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    box-shadow:var(--outer);
+    border-radius:var(--radius-xl);
+    background:var(--card);
+    padding:20px 40px;
+    gap:25px;
+}
+
+#puzzleBoard{
+    width:360px;
+    height:360px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    padding:30px ;
+    gap:5px;    
+}
+
+.tile{
+    aspect-ratio:1;
+    background-repeat:no-repeat;
+    background-size:300% 300%;
+    border-radius:5px;
+    cursor:pointer;
+    box-shadow:var(--outer);
+    transition:var(--transition);
+}
+
+.tile:active{
+    transform:scale(.9);
+}
+
+.empty{
+    background:none!important;
+    box-shadow:var(--inset);
+    cursor:default;
+}
+
+.puzzle-btn{
+    display:flex;
+    gap:15px;
+}
+
+.puzzle-btn button{
+    border:0;
+    padding:12px 25px;
+    border-radius:var(--radius-lg);
+    background:var(--card);
+    color:var(--white);
+    font-family:var(--font);
+    font-weight:bold;
+    cursor:pointer;
+    box-shadow:var(--outer);
+    transition:var(--transition);
+}
+
+.puzzle-btn button:active{
+    box-shadow:var(--inset);
+}
+
+@media(max-width:600px){
+
+    #puzzleBoard{
+        width:90vw;
+        height:90vw;
+    }
+
+    .puzzle-btn{
+        width:100%;
+        justify-content:center;
+    }
+
+    .puzzle-btn button{
+        padding:10px 18px;
+    }
+
+}
+
 </style>
 </head>
 <body oncontextmenu="return false;" oncopy="return false;" onselectstart="return false;">
@@ -1612,36 +1696,56 @@ footer p{
 
 <section id="games">
     <div class="container">
-
         <div class="section-title">
             <h2>
                 <i class="fa-solid fa-gamepad"></i>
                 Couple Games
             </h2>
-            <p><p>Setiap kemenangan adalah milik kita berdua.</p></p>
+            <p>Setiap kemenangan adalah milik kita berdua.</p>
         </div>
 
         <div class="games-grid">
-
-            <!-- Tic Tac Toe -->
             <div class="game-card">
-
                 <h3>TIC TAC TOE</h3>
                 <p>Play together & Stay together</p>
-
                 <div id="ticBoard" class="tic-board"></div>
-
                 <button class="button" id="resetGame">
                     Reset Game
                 </button>
-
                 <h4 id="gameStatus"> Mulai Permainan </h4>
-
             </div>
-
         </div>
-
     </div>
+</section>
+
+<section id="puzzle">
+<div class="container">
+
+<div class="section-title">
+<h2>
+<i class="fa-solid fa-puzzle-piece"></i>
+Photo Puzzle
+</h2>
+<p>Susun kembali gambar sampai sempurna.</p>
+</div>
+
+<div class="puzzle-box">
+
+<div id="puzzleBoard"></div>
+
+<div class="puzzle-btn">
+<button onclick="shufflePuzzle()">
+<i class="fa-solid fa-shuffle"></i> Shuffle
+</button>
+
+<button onclick="resetPuzzle()">
+<i class="fa-solid fa-rotate"></i> Reset
+</button>
+</div>
+
+</div>
+
+</div>
 </section>
 
 <footer>
@@ -2025,6 +2129,189 @@ document.querySelectorAll('.button').forEach(el => {
 document.addEventListener("contextmenu", e => e.preventDefault());
 document.addEventListener("selectstart", e => e.preventDefault());
 document.addEventListener("copy", e => e.preventDefault());
+</script>
+
+<script>
+
+const puzzleBoard = document.getElementById("puzzleBoard");
+
+const imageURL = "https://i.ibb.co.com/spTFVpH1/file-0000000037f07209951fcde1c4910603.png";
+
+let puzzle = [];
+let emptyIndex = 8;
+
+
+function initPuzzle(){
+
+    puzzle = [0,1,2,3,4,5,6,7,8];
+
+    emptyIndex = 8;
+
+    renderPuzzle();
+
+}
+
+
+function renderPuzzle(){
+
+    puzzleBoard.innerHTML = "";
+
+    puzzle.forEach((value,index)=>{
+
+        const tile = document.createElement("div");
+
+        tile.className = "tile";
+
+
+        if(value === 8){
+
+            tile.classList.add("empty");
+
+        }else{
+
+            let x = (value % 3) * 50;
+            let y = Math.floor(value / 3) * 50;
+
+            tile.style.backgroundImage =
+            `url(${imageURL})`;
+
+            tile.style.backgroundPosition =
+            `${x}% ${y}%`;
+
+        }
+
+
+        tile.onclick = ()=>moveTile(index);
+
+
+        puzzleBoard.appendChild(tile);
+
+    });
+
+}
+
+
+
+function moveTile(index){
+
+    const row = Math.floor(index / 3);
+    const col = index % 3;
+
+    const emptyRow = Math.floor(emptyIndex / 3);
+    const emptyCol = emptyIndex % 3;
+
+
+    const distance =
+    Math.abs(row-emptyRow)+Math.abs(col-emptyCol);
+
+
+    if(distance === 1){
+
+        [
+            puzzle[index],
+            puzzle[emptyIndex]
+        ] =
+        [
+            puzzle[emptyIndex],
+            puzzle[index]
+        ];
+
+
+        emptyIndex = index;
+
+
+        renderPuzzle();
+
+        checkWin();
+
+    }
+
+}
+
+
+
+function shufflePuzzle(){
+
+    let moves = 150;
+
+
+    for(let i=0;i<moves;i++){
+
+        let possible=[];
+
+
+        const row=Math.floor(emptyIndex/3);
+        const col=emptyIndex%3;
+
+
+        if(row>0)
+            possible.push(emptyIndex-3);
+
+        if(row<2)
+            possible.push(emptyIndex+3);
+
+        if(col>0)
+            possible.push(emptyIndex-1);
+
+        if(col<2)
+            possible.push(emptyIndex+1);
+
+
+
+        let random =
+        possible[Math.floor(Math.random()*possible.length)];
+
+
+        [
+            puzzle[random],
+            puzzle[emptyIndex]
+        ] =
+        [
+            puzzle[emptyIndex],
+            puzzle[random]
+        ];
+
+
+        emptyIndex=random;
+
+    }
+
+
+    renderPuzzle();
+
+}
+
+
+
+function resetPuzzle(){
+
+    initPuzzle();
+
+}
+
+
+
+function checkWin(){
+
+    const win =
+    puzzle.every((value,index)=>value===index);
+
+
+    if(win){
+
+        setTimeout(()=>{
+
+            alert("Puzzle berhasil diselesaikan!");
+
+        },200);
+
+    }
+
+}
+
+
+initPuzzle();
+
 </script>
 
 </body>
