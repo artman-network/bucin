@@ -3,23 +3,69 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-<title>Relationship Journal — Play Together & Stay Forever</title>
+<!-- SEO -->
 
-<meta name="description"
-content="Relationship Journal modern dengan games, timeline, gallery, love letter, playlist, anniversary countdown, dashboard dan wishlist.">
+<title>Relationship Journal | Our Love Story</title>
+
+<meta name="title" content="Relationship Journal | Our Love Story">
+<meta name="description" content="Ruang digital untuk menyimpan cerita, kenangan, dan momen berharga dalam sebuah website pribadi.">
+<meta name="keywords" content="relationship journal, love journal, anniversary, couple website, love story, romantic website, relationship tracker">
+<meta name="author" content="Artman">
+<meta name="creator" content="Artman">
+<meta name="publisher" content="Artman">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="language" content="Indonesian">
+
+<!-- Theme -->
 
 <meta name="theme-color" content="#ff7aa2">
+<meta name="color-scheme" content="light">
+
+<!-- Open Graph -->
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="id_ID">
+<meta property="og:title" content="Relationship Journal | Our Love Story">
+<meta property="og:description" content="Play Together & Stay Forever">
+<meta property="og:image" content="assets/images/cover.jpg">
+<meta property="og:url" content="https://yourdomain.com">
+<meta property="og:site_name" content="Relationship Journal">
+
+<!-- Twitter -->
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Relationship Journal | Our Love Story">
+<meta name="twitter:description" content="Play Together & Stay Forever">
+<meta name="twitter:image" content="assets/images/cover.jpg">
+
+<!-- Mobile Web App -->
+
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Relationship Journal">
+<meta name="format-detection" content="telephone=no">
+
+<!-- Icons -->
+
+<link rel="icon" href="assets/images/favicon.ico">
+<link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
+
+<!-- Google Fonts -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-<link
-rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
+<!-- Font Awesome -->
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<!-- Swiper -->
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 
@@ -107,6 +153,58 @@ a{
     width:min(1200px,92%);
     margin:auto;
 }
+
+.button,
+button{
+    outline:none;
+    border:none;
+    -webkit-appearance:none;
+    appearance:none;
+}
+
+.button:focus,
+button:focus{
+    outline:none;
+    box-shadow:var(--outer);
+}
+
+.button::-moz-focus-inner,
+button::-moz-focus-inner{
+    border:0;
+}
+
+.button,
+.tag{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50px;
+    color:#fff;
+    background:var(--bg);
+    box-shadow:var(--outer);
+    font-family:var(--font);
+    font-weight:600;
+    transition:var(--transition);
+}
+
+.button{
+    padding:15px 35px;
+    font-size:15px;
+}
+
+
+.tag{
+    margin-top:auto;
+    align-self:flex-start;
+    padding:8px 18px;
+    font-size:13px;
+}
+
+.button:active,
+.tag:active{
+    box-shadow:var(--inset);
+}
+
 
 /*======================================
 HERO
@@ -283,57 +381,6 @@ RELATIONSHIP JOURNAL
     color:var(--text-light);
     line-height:1.8;
     margin-bottom:20px;
-}
-
-.button,
-button{
-    outline:none;
-    border:none;
-    -webkit-appearance:none;
-    appearance:none;
-}
-
-.button:focus,
-button:focus{
-    outline:none;
-    box-shadow:var(--outer);
-}
-
-.button::-moz-focus-inner,
-button::-moz-focus-inner{
-    border:0;
-}
-
-.button,
-.tag{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:50px;
-    color:#fff;
-    background:var(--bg);
-    box-shadow:var(--outer);
-    font-family:var(--font);
-    font-weight:600;
-    transition:var(--transition);
-}
-
-.button{
-    padding:15px 35px;
-    font-size:15px;
-}
-
-
-.tag{
-    margin-top:auto;
-    align-self:flex-start;
-    padding:8px 18px;
-    font-size:13px;
-}
-
-.button:active,
-.tag:active{
-    box-shadow:var(--inset);
 }
 
 /*======================================
@@ -895,25 +942,38 @@ BADGES
     box-shadow:var(--inset);
 }
 
-/* FOOTER */
+
+/*======================================
+FOOTER
+======================================*/
+
 footer{
     margin-top:120px;
     padding:60px 0;
     text-align:center;
 }
+
 footer h2{
     color:var(--color);
 }
+
 footer p{
     color:var(--text-light);
     margin-top:15px;
 }
+
+
+/*======================================
+SOCIAL
+======================================*/
+
 .social{
     display:flex;
     justify-content:center;
     gap:18px;
     margin:25px 0;
 }
+
 .social a{
     width:55px;
     height:55px;
@@ -926,9 +986,15 @@ footer p{
     font-size:22px;
     transition:var(--transition);
 }
+
 .social a:active{
     box-shadow:var(--inset);
 }
+
+
+/*======================================
+LOVE RAIN
+======================================*/
 
 .love-rain{
     position:fixed;
@@ -940,27 +1006,39 @@ footer p{
 }
 
 @keyframes loveFall{
+
     0%{
         transform:translate(0,-50px) rotate(0deg);
         opacity:0;
     }
+
     10%{
         opacity:1;
     }
+
     25%{
         transform:translate(-30px,25vh) rotate(120deg);
     }
+
     50%{
         transform:translate(35px,50vh) rotate(260deg);
     }
+
     75%{
         transform:translate(-25px,75vh) rotate(420deg);
     }
+
     100%{
         transform:translate(20px,110vh) rotate(720deg);
         opacity:0;
     }
+
 }
+
+
+/*======================================
+GAMES
+======================================*/
 
 #games{
     padding:20px 0;
@@ -981,6 +1059,11 @@ footer p{
     box-shadow:var(--outer);
     text-align:center;
 }
+
+
+/*======================================
+TIC TAC TOE
+======================================*/
 
 .tic-board{
     display:grid;
@@ -1016,7 +1099,81 @@ footer p{
     color:#fff;
 }
 
-/* RESPONSIVE */
+
+/*======================================
+PHOTO PUZZLE
+======================================*/
+
+#puzzle{
+    padding:80px 0;
+}
+
+.puzzle-box{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:25px;
+    padding:40px;
+    background:var(--card);
+    border-radius:var(--radius-xl);
+    box-shadow:var(--outer);
+}
+
+#puzzleBoard{
+    width:360px;
+    height:360px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:5px;
+    padding:30px;
+}
+
+.tile{
+    aspect-ratio:1;
+    background-repeat:no-repeat;
+    background-size:300% 300%;
+    border-radius:5px;
+    cursor:pointer;
+    box-shadow:var(--outer);
+    transition:var(--transition);
+}
+
+.tile:active{
+    transform:scale(.9);
+}
+
+.empty{
+    background:none!important;
+    box-shadow:var(--inset);
+    cursor:default;
+}
+
+.puzzle-btn{
+    display:flex;
+    gap:15px;
+}
+
+.puzzle-btn button{
+    padding:12px 25px;
+    border:0;
+    border-radius:var(--radius-lg);
+    background:var(--card);
+    color:var(--white);
+    font-family:var(--font);
+    font-weight:bold;
+    cursor:pointer;
+    box-shadow:var(--outer);
+    transition:var(--transition);
+}
+
+.puzzle-btn button:active{
+    box-shadow:var(--inset);
+}
+
+/*======================================
+RESPONSIVE 
+======================================*/
+
 @media(max-width:992px){
     .hero-grid,
     .analytics-grid,
@@ -1061,6 +1218,20 @@ footer p{
 
 
 @media(max-width:768px){
+
+    #puzzleBoard{
+        width:90vw;
+        height:90vw;
+    }
+
+    .puzzle-btn{
+        width:100%;
+        justify-content:center;
+    }
+
+    .puzzle-btn button{
+        padding:10px 18px;
+    }
 
     .game-card{
         max-width:420px;
@@ -1167,93 +1338,11 @@ footer p{
     }
 }
 
-#puzzle{
-    padding:80px 0;
-}
-
-.puzzle-box{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    box-shadow:var(--outer);
-    border-radius:var(--radius-xl);
-    background:var(--card);
-    padding:40px;
-    gap:25px;
-}
-
-#puzzleBoard{
-    width:360px;
-    height:360px;
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    padding:30px ;
-    gap:5px;    
-}
-
-.tile{
-    aspect-ratio:1;
-    background-repeat:no-repeat;
-    background-size:300% 300%;
-    border-radius:5px;
-    cursor:pointer;
-    box-shadow:var(--outer);
-    transition:var(--transition);
-}
-
-.tile:active{
-    transform:scale(.9);
-}
-
-.empty{
-    background:none!important;
-    box-shadow:var(--inset);
-    cursor:default;
-}
-
-.puzzle-btn{
-    display:flex;
-    gap:15px;
-}
-
-.puzzle-btn button{
-    border:0;
-    padding:12px 25px;
-    border-radius:var(--radius-lg);
-    background:var(--card);
-    color:var(--white);
-    font-family:var(--font);
-    font-weight:bold;
-    cursor:pointer;
-    box-shadow:var(--outer);
-    transition:var(--transition);
-}
-
-.puzzle-btn button:active{
-    box-shadow:var(--inset);
-}
-
-@media(max-width:600px){
-
-    #puzzleBoard{
-        width:90vw;
-        height:90vw;
-    }
-
-    .puzzle-btn{
-        width:100%;
-        justify-content:center;
-    }
-
-    .puzzle-btn button{
-        padding:10px 18px;
-    }
-
-}
-
 </style>
 </head>
 <body oncontextmenu="return false;" oncopy="return false;" onselectstart="return false;">
+
+<!-- Hero -->
 
 <section class="hero">
     <div class="container hero-grid">
@@ -1306,6 +1395,11 @@ footer p{
     </div>
 </section>
 
+<!-- End Hero -->
+
+
+<!-- Relationship Journal -->
+
 <section id="journal">
     <div class="container">
         <div class="section-title">
@@ -1346,6 +1440,11 @@ footer p{
         </div>
     </div>
 </section>
+
+<!-- End Relationship Journal -->
+
+
+<!-- Timeline -->
 
 <section id="timeline">
     <div class="container">
@@ -1388,6 +1487,11 @@ footer p{
     </div>
 </section>
 
+<!-- End Timeline -->
+
+
+<!-- Anniversary Countdown -->
+
 <section id="countdown">
     <div class="container">
         <div class="section-title">
@@ -1425,6 +1529,11 @@ footer p{
         </div>
     </div>
 </section>
+
+<!-- End Anniversary Countdown -->
+
+
+<!-- Gallery -->
 
 <section id="gallery">
     <div class="container">
@@ -1478,6 +1587,11 @@ footer p{
     </div>
 </section>
 
+<!-- End Gallery -->
+
+
+<!-- Places -->
+
 <section id="places">
     <div class="container">
         <div class="section-title">
@@ -1504,6 +1618,11 @@ footer p{
     </div>
 </section>
 
+<!-- End Places -->
+
+
+<!-- Playlist -->
+
 <section id="playlist">
     <div class="container">
         <div class="section-title">
@@ -1523,6 +1642,11 @@ footer p{
         </div>
     </div>
 </section>
+
+<!-- End Playlist -->
+
+
+<!-- Wishlist -->
 
 <section id="wishlist">
     <div class="container">
@@ -1581,7 +1705,12 @@ footer p{
     </div>
 </section>
 
-<section class="progress-premium">
+<!-- End Wishlist -->
+
+
+<!-- Relationship Dashboard -->
+
+<section class="relationship">
     <div class="container">
         <div class="section-title">
             <h2>
@@ -1622,6 +1751,11 @@ footer p{
         </div>
     </div>
 </section>
+
+<!-- End Relationship Dashboard -->
+
+
+<!-- Relationship Analytics -->
 
 <section class="analytics">
     <div class="container">
@@ -1685,58 +1819,70 @@ footer p{
     </div>
 </section>
 
-<section id="games">
+<!-- End Relationship Analytics -->
+
+
+<!-- Tic Tac Toe -->
+
+<section id="tictactoe">
     <div class="container">
         <div class="section-title">
             <h2>
                 <i class="fa-solid fa-gamepad"></i>
-                Couple Games
+                Tic Tac Toe
             </h2>
             <p>Setiap kemenangan adalah milik kita berdua.</p>
         </div>
-
+        
         <div class="games-grid">
             <div class="game-card">
-                
                 <div id="ticBoard" class="tic-board"></div>
-                <button class="button" id="resetGame">
+                <button id="resetGame" class="button">
                     Reset Game
                 </button>
-                <h4 id="gameStatus"> Mulai Permainan </h4>
+                <h4 id="gameStatus">
+                    Mulai Permainan
+                </h4>
             </div>
         </div>
     </div>
 </section>
 
+<!-- End Tic Tac Toe -->
+
+
+<!-- Photo Puzzle -->
+
 <section id="puzzle">
-<div class="container">
-
-<div class="section-title">
-<h2>
-<i class="fa-solid fa-puzzle-piece"></i>
-Photo Puzzle
-</h2>
-<p>Susun kembali gambar sampai sempurna.</p>
-</div>
-
-<div class="puzzle-box">
-
-<div id="puzzleBoard"></div>
-
-<div class="puzzle-btn">
-<button onclick="shufflePuzzle()">
-<i class="fa-solid fa-shuffle"></i> Shuffle
-</button>
-
-<button onclick="resetPuzzle()">
-<i class="fa-solid fa-rotate"></i> Reset
-</button>
-</div>
-
-</div>
-
-</div>
+    <div class="container">
+        <div class="section-title">
+            <h2>
+                <i class="fa-solid fa-puzzle-piece"></i>
+                Photo Puzzle
+            </h2>
+            <p>Susun kembali gambar sampai sempurna.</p>
+        </div>
+        
+        <div class="puzzle-box">
+            <div id="puzzleBoard"></div>
+            <div class="puzzle-btn">
+                <button onclick="shufflePuzzle()">
+                    <i class="fa-solid fa-shuffle"></i>
+                    Shuffle
+                </button>
+                <button onclick="resetPuzzle()">
+                    <i class="fa-solid fa-rotate"></i>
+                    Reset
+                </button>
+            </div>
+        </div>
+    </div>
 </section>
+
+<!-- End Photo Puzzle -->
+
+
+<!-- Footer -->
 
 <footer>
     <h2>Our Story</h2>
@@ -1752,232 +1898,293 @@ Photo Puzzle
     <p>&copy; 2026 Relationship Journal Premium</p>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- End Footer -->
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 <script>
-const ctx=document.getElementById("loveChart");
 
-new Chart(ctx,{
-    type:"line",
-    data:{
-        labels:["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu"],
-        datasets:[{
-            label:"Memories",
-            data:[8,12,10,15,18,20,24,28],
-            fill:true,
-            tension:.4,
-            borderWidth:3,
-            borderColor:"#fff",
-            backgroundColor:"rgba(255,255,255,.12)",
-            pointBackgroundColor:"#fff",
-            pointBorderColor:"#fff",
-            pointHoverBackgroundColor:"#fff",
-            pointHoverBorderColor:"#fff",
-            pointRadius:5,
-            pointHoverRadius:7
+/* =========================================================
+   LOVE CHART
+   ========================================================= */
+
+const ctx = document.getElementById("loveChart");
+
+new Chart(ctx, {
+    type: "line",
+    data: {
+        labels: [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "Mei",
+            "Jun",
+            "Jul",
+            "Agu"
+        ],
+        datasets: [{
+            label: "Memories",
+            data: [8, 12, 10, 15, 18, 20, 24, 28],
+            fill: true,
+            tension: 0.4,
+            borderWidth: 3,
+            borderColor: "#fff",
+            backgroundColor: "rgba(255,255,255,.12)",
+            pointBackgroundColor: "#fff",
+            pointBorderColor: "#fff",
+            pointHoverBackgroundColor: "#fff",
+            pointHoverBorderColor: "#fff",
+            pointRadius: 5,
+            pointHoverRadius: 7
         }]
     },
-    options:{
-        responsive:true,
-        maintainAspectRatio:false,
-        plugins:{
-            legend:{
-                display:false
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: false
             },
-            tooltip:{
-                backgroundColor:"#222",
-                titleColor:"#fff",
-                bodyColor:"#fff",
-                borderColor:"#fff",
-                borderWidth:1
+            tooltip: {
+                backgroundColor: "#222",
+                titleColor: "#fff",
+                bodyColor: "#fff",
+                borderColor: "#fff",
+                borderWidth: 1
             }
         },
-        scales:{
-            x:{
-                ticks:{
-                    color:"#fff",
-                    font:{
-                        size:13,
-                        weight:"600"
+        scales: {
+            x: {
+                ticks: {
+                    color: "#fff",
+                    font: {
+                        size: 13,
+                        weight: "600"
                     }
                 },
-                grid:{
-                    color:"rgba(255,255,255,.12)"
+                grid: {
+                    color: "rgba(255,255,255,.12)"
                 },
-                border:{
-                    color:"rgba(255,255,255,.3)"
+                border: {
+                    color: "rgba(255,255,255,.3)"
                 }
             },
-            y:{
-                beginAtZero:true,
-                ticks:{
-                    color:"#fff",
-                    font:{
-                        size:13,
-                        weight:"600"
+            y: {
+                beginAtZero: true,
+                ticks: {
+                    color: "#fff",
+                    font: {
+                        size: 13,
+                        weight: "600"
                     }
                 },
-                grid:{
-                    color:"rgba(255,255,255,.12)"
+                grid: {
+                    color: "rgba(255,255,255,.12)"
                 },
-                border:{
-                    color:"rgba(255,255,255,.3)"
+                border: {
+                    color: "rgba(255,255,255,.3)"
                 }
             }
         }
     }
 });
-</script>
 
-<script>
-const month = 4; // Mei (0 = Januari)
+
+/* =========================================================
+   ANNIVERSARY COUNTDOWN
+   ========================================================= */
+
+const month = 4;
 const day = 29;
 
 function getTargetDate() {
+
     const now = new Date();
     let year = now.getFullYear();
 
-    let target = new Date(year, month, day, 0, 0, 0);
+    let target = new Date(year, month, day);
 
     if (target < now) {
-        target = new Date(year + 1, month, day, 0, 0, 0);
+        target = new Date(year + 1, month, day);
     }
 
     return target;
+
 }
 
-setInterval(() => {
-    const now = Date.now();
-    const targetDate = getTargetDate().getTime();
-    const distance = targetDate - now;
+function updateCountdown() {
 
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    const distance = getTargetDate() - Date.now();
 
-    document.getElementById("days").textContent = days;
-    document.getElementById("hours").textContent = hours;
-    document.getElementById("minutes").textContent = minutes;
-    document.getElementById("seconds").textContent = seconds;
-}, 1000);
-</script>
+    document.getElementById("days").textContent =
+        Math.floor(distance / 86400000);
 
-<script>
+    document.getElementById("hours").textContent =
+        Math.floor(distance % 86400000 / 3600000);
+
+    document.getElementById("minutes").textContent =
+        Math.floor(distance % 3600000 / 60000);
+
+    document.getElementById("seconds").textContent =
+        Math.floor(distance % 60000 / 1000);
+
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+
+/* =========================================================
+   GALLERY LIGHTBOX
+   ========================================================= */
+
 const galleryImages = document.querySelectorAll(".gallery-item img");
 const lightbox = document.getElementById("lightbox");
 const preview = document.getElementById("preview");
 
 galleryImages.forEach(img => {
-    img.onclick = () => {
+
+    img.addEventListener("click", () => {
+
         lightbox.classList.add("active");
         preview.src = img.src;
-    };
-});
 
-lightbox.onclick = () => {
-    lightbox.classList.remove("active");
-};
-</script>
-
-<script>
-/* Scroll Reveal */
-const reveal = () => {
-    document.querySelectorAll(
-        "section,.card,.journal-card,.gallery-item,.place-card,.stat-card"
-    ).forEach(el => {
-        const top = el.getBoundingClientRect().top;
-
-        if (top < window.innerHeight - 100) {
-            el.style.opacity = "1";
-            el.style.transform = "translateY(0)";
-        }
     });
-};
 
-document.querySelectorAll(
-    "section,.card,.journal-card,.gallery-item,.place-card,.stat-card"
-).forEach(el => {
-    el.style.opacity = "0";
-    el.style.transform = "translateY(40px)";
-    el.style.transition = ".7s";
 });
+
+lightbox.addEventListener("click", () => {
+
+    lightbox.classList.remove("active");
+
+});
+
+
+/* =========================================================
+   SCROLL REVEAL
+   ========================================================= */
+
+const revealItems = document.querySelectorAll(
+    "section,.card,.journal-card,.gallery-item,.place-card,.stat-card"
+);
+
+revealItems.forEach(item => {
+
+    item.style.opacity = "0";
+    item.style.transform = "translateY(40px)";
+    item.style.transition = ".7s";
+
+});
+
+function reveal() {
+
+    revealItems.forEach(item => {
+
+        if (item.getBoundingClientRect().top < window.innerHeight - 100) {
+
+            item.style.opacity = "1";
+            item.style.transform = "translateY(0)";
+
+        }
+
+    });
+
+}
 
 window.addEventListener("scroll", reveal);
 reveal();
 
-const loveBtn=document.getElementById("loveBtn");
 
-loveBtn.addEventListener("click",e=>{
+/* =========================================================
+   LOVE RAIN
+   ========================================================= */
+
+const loveBtn = document.getElementById("loveBtn");
+
+loveBtn.addEventListener("click", e => {
+
     e.preventDefault();
 
-    const emoji=["💞","💕","💖","💗","🎀","💓","🌺","💘"];
+    const emoji = [
+        "💞",
+        "💕",
+        "💖",
+        "💗",
+        "🎀",
+        "💓",
+        "🌺",
+        "💘"
+    ];
 
-    for(let i=0;i<100;i++){
+    for (let i = 0; i < 100; i++) {
 
-        setTimeout(()=>{
+        setTimeout(() => {
 
-            const love=document.createElement("span");
-            love.className="love-rain";
+            const love = document.createElement("span");
 
-            love.textContent=emoji[Math.floor(Math.random()*emoji.length)];
+            love.className = "love-rain";
+            love.textContent =
+                emoji[Math.floor(Math.random() * emoji.length)];
 
-            love.style.left=Math.random()*100+"vw";
-            love.style.fontSize=(16+Math.random()*18)+"px";
-            love.style.animationDuration=(3+Math.random()*2)+"s";
+            love.style.left = Math.random() * 100 + "vw";
+            love.style.fontSize = 16 + Math.random() * 18 + "px";
+            love.style.animationDuration = 3 + Math.random() * 2 + "s";
 
             document.body.appendChild(love);
 
-            love.addEventListener("animationend",()=>love.remove());
+            love.addEventListener("animationend", () => love.remove());
 
-        },i*70);
+        }, i * 70);
 
     }
+
 });
-</script>
 
-<script>
 
-/*======================================
-COUPLE GAMES
-======================================*/
+/* =========================================================
+   TIC TAC TOE
+   ========================================================= */
 
-/* ========= TIC TAC TOE ========= */
+const board = document.getElementById("ticBoard");
+const status = document.getElementById("gameStatus");
+const reset = document.getElementById("resetGame");
 
-const board=document.getElementById("ticBoard");
-const status=document.getElementById("gameStatus");
-const reset=document.getElementById("resetGame");
-
-let cells=["","","","","","","","",""];
-let player="X";
-let finished=false;
-
-const winPattern=[
-[0,1,2],
-[3,4,5],
-[6,7,8],
-[0,3,6],
-[1,4,7],
-[2,5,8],
-[0,4,8],
-[2,4,6]
+let cells = [
+    "", "", "",
+    "", "", "",
+    "", "", ""
 ];
 
-function drawBoard(){
+let player = "X";
+let finished = false;
 
-    board.innerHTML="";
+const winPattern = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
+];
 
-    cells.forEach((cell,index)=>{
+function drawBoard() {
 
-        const div=document.createElement("div");
+    board.innerHTML = "";
 
-        div.className="cell";
+    cells.forEach((cell, index) => {
 
-        div.textContent=cell;
+        const div = document.createElement("div");
 
-        div.onclick=()=>play(index);
+        div.className = "cell";
+        div.textContent = cell;
+
+        div.addEventListener("click", () => {
+            play(index);
+        });
 
         board.appendChild(div);
 
@@ -1985,159 +2192,98 @@ function drawBoard(){
 
 }
 
-function play(index){
+function play(index) {
 
-    if(cells[index]||finished)return;
+    if (cells[index] || finished) {
+        return;
+    }
 
-    cells[index]=player;
+    cells[index] = player;
 
     drawBoard();
 
-    if(checkWinner()){
+    if (checkWinner()) {
 
-        status.textContent=player+" Player Menang";
-
-        finished=true;
-
-        return;
-
-    }
-
-    if(!cells.includes("")){
-
-        status.textContent="Permainan Seri";
-
-        finished=true;
+        status.textContent = player + " Player Menang";
+        finished = true;
 
         return;
 
     }
 
-    player=player==="X"?"O":"X";
+    if (!cells.includes("")) {
 
-    status.textContent="Giliran Player "+player;
+        status.textContent = "Permainan Seri";
+        finished = true;
+
+        return;
+
+    }
+
+    player = player === "X"
+        ? "O"
+        : "X";
+
+    status.textContent = "Giliran Player " + player;
 
 }
 
-function checkWinner(){
+function checkWinner() {
 
-    return winPattern.some(pattern=>{
+    return winPattern.some(pattern => {
 
-        const[a,b,c]=pattern;
+        const [a, b, c] = pattern;
 
-        return cells[a]&&cells[a]===cells[b]&&cells[a]===cells[c];
+        return (
+            cells[a] &&
+            cells[a] === cells[b] &&
+            cells[a] === cells[c]
+        );
 
     });
 
 }
 
-reset.onclick=()=>{
+reset.addEventListener("click", () => {
 
-    cells=["","","","","","","","",""];
+    cells = [
+        "", "", "",
+        "", "", "",
+        "", "", ""
+    ];
 
-    player="X";
+    player = "X";
+    finished = false;
 
-    finished=false;
-
-    status.textContent=" X versus O";
+    status.textContent = "X versus O";
 
     drawBoard();
 
-};
+});
 
 drawBoard();
-</script>
 
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-<script>
-new Swiper(".heroSwiper",{
-    loop:true,
-    speed:800,
-    grabCursor:true,
 
-    autoplay:{
-        delay:3500,
-        disableOnInteraction:false
-    },
-
-    pagination:{
-        el:".swiper-pagination",
-        clickable:true
-    },
-
-    navigation:{
-        nextEl:".swiper-button-next",
-        prevEl:".swiper-button-prev"
-    }
-});
-
-const audioCtx=new(window.AudioContext||window.webkit.AudioContext)();
-
-function clickSound(){
-
-    if(audioCtx.state==="suspended"){
-        audioCtx.resume();
-    }
-
-    const osc=audioCtx.createOscillator();
-    const gain=audioCtx.createGain();
-
-    osc.type="triangle";
-    osc.frequency.value=700;
-
-    gain.gain.setValueAtTime(.08,audioCtx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(.0001,audioCtx.currentTime+.05);
-
-    osc.connect(gain);
-    gain.connect(audioCtx.destination);
-
-    osc.start();
-    osc.stop(audioCtx.currentTime+.05);
-
-}
-
-document.addEventListener("click",e=>{
-
-    if(
-        e.target.closest(".button")||
-        e.target.closest(".tag")||
-        e.target.closest(".cell")||
-        e.target.closest(".social a")||
-        e.target.closest(".puzzle-btn button")||
-        e.target.closest(".tile")
-    ){
-
-        clickSound();
-
-    }
-
-});
-
-document.querySelectorAll('.button').forEach(el => {
-  el.addEventListener('mousedown', () => el.classList.add('pressed'));
-  el.addEventListener('mouseup', () => el.classList.remove('pressed'));
-  el.addEventListener('mouseleave', () => el.classList.remove('pressed'));
-});
-
-document.addEventListener("contextmenu", e => e.preventDefault());
-document.addEventListener("selectstart", e => e.preventDefault());
-document.addEventListener("copy", e => e.preventDefault());
-</script>
-
-<script>
+/* =========================================================
+   IMAGE PUZZLE
+   ========================================================= */
 
 const puzzleBoard = document.getElementById("puzzleBoard");
 
-const imageURL = "https://i.ibb.co.com/spTFVpH1/file-0000000037f07209951fcde1c4910603.png";
+const imageURL =
+    "https://i.ibb.co.com/spTFVpH1/file-0000000037f07209951fcde1c4910603.png";
 
 let puzzle = [];
 let emptyIndex = 8;
 
+function initPuzzle() {
 
-function initPuzzle(){
-
-    puzzle = [0,1,2,3,4,5,6,7,8];
+    puzzle = [
+        0, 1, 2,
+        3, 4, 5,
+        6, 7, 8
+    ];
 
     emptyIndex = 8;
 
@@ -2145,38 +2291,36 @@ function initPuzzle(){
 
 }
 
-
-function renderPuzzle(){
+function renderPuzzle() {
 
     puzzleBoard.innerHTML = "";
 
-    puzzle.forEach((value,index)=>{
+    puzzle.forEach((value, index) => {
 
         const tile = document.createElement("div");
 
         tile.className = "tile";
 
-
-        if(value === 8){
+        if (value === 8) {
 
             tile.classList.add("empty");
 
-        }else{
+        } else {
 
-            let x = (value % 3) * 50;
-            let y = Math.floor(value / 3) * 50;
+            const x = (value % 3) * 50;
+            const y = Math.floor(value / 3) * 50;
 
             tile.style.backgroundImage =
-            `url(${imageURL})`;
+                `url(${imageURL})`;
 
             tile.style.backgroundPosition =
-            `${x}% ${y}%`;
+                `${x}% ${y}%`;
 
         }
 
-
-        tile.onclick = ()=>moveTile(index);
-
+        tile.addEventListener("click", () => {
+            moveTile(index);
+        });
 
         puzzleBoard.appendChild(tile);
 
@@ -2184,9 +2328,7 @@ function renderPuzzle(){
 
 }
 
-
-
-function moveTile(index){
+function moveTile(index) {
 
     const row = Math.floor(index / 3);
     const col = index % 3;
@@ -2194,117 +2336,214 @@ function moveTile(index){
     const emptyRow = Math.floor(emptyIndex / 3);
     const emptyCol = emptyIndex % 3;
 
-
     const distance =
-    Math.abs(row-emptyRow)+Math.abs(col-emptyCol);
+        Math.abs(row - emptyRow) +
+        Math.abs(col - emptyCol);
 
-
-    if(distance === 1){
-
-        [
-            puzzle[index],
-            puzzle[emptyIndex]
-        ] =
-        [
-            puzzle[emptyIndex],
-            puzzle[index]
-        ];
-
-
-        emptyIndex = index;
-
-
-        renderPuzzle();
-
-        checkWin();
-
+    if (distance !== 1) {
+        return;
     }
+
+    [
+        puzzle[index],
+        puzzle[emptyIndex]
+    ] = [
+        puzzle[emptyIndex],
+        puzzle[index]
+    ];
+
+    emptyIndex = index;
+
+    renderPuzzle();
+
+    checkWin();
 
 }
 
+function shufflePuzzle() {
 
+    const moves = 150;
 
-function shufflePuzzle(){
+    for (let i = 0; i < moves; i++) {
 
-    let moves = 150;
+        const possible = [];
 
+        const row = Math.floor(emptyIndex / 3);
+        const col = emptyIndex % 3;
 
-    for(let i=0;i<moves;i++){
+        if (row > 0) {
+            possible.push(emptyIndex - 3);
+        }
 
-        let possible=[];
+        if (row < 2) {
+            possible.push(emptyIndex + 3);
+        }
 
+        if (col > 0) {
+            possible.push(emptyIndex - 1);
+        }
 
-        const row=Math.floor(emptyIndex/3);
-        const col=emptyIndex%3;
+        if (col < 2) {
+            possible.push(emptyIndex + 1);
+        }
 
-
-        if(row>0)
-            possible.push(emptyIndex-3);
-
-        if(row<2)
-            possible.push(emptyIndex+3);
-
-        if(col>0)
-            possible.push(emptyIndex-1);
-
-        if(col<2)
-            possible.push(emptyIndex+1);
-
-
-
-        let random =
-        possible[Math.floor(Math.random()*possible.length)];
-
+        const random =
+            possible[
+                Math.floor(
+                    Math.random() * possible.length
+                )
+            ];
 
         [
             puzzle[random],
             puzzle[emptyIndex]
-        ] =
-        [
+        ] = [
             puzzle[emptyIndex],
             puzzle[random]
         ];
 
-
-        emptyIndex=random;
+        emptyIndex = random;
 
     }
-
 
     renderPuzzle();
 
 }
 
-
-
-function resetPuzzle(){
+function resetPuzzle() {
 
     initPuzzle();
 
 }
 
+function checkWin() {
 
+    const win = puzzle.every((value, index) => {
+        return value === index;
+    });
 
-function checkWin(){
-
-    const win =
-    puzzle.every((value,index)=>value===index);
-
-
-    if(win){
-
-        setTimeout(()=>{
-
-            alert("Puzzle berhasil diselesaikan!");
-
-        },200);
-
+    if (!win) {
+        return;
     }
+
+    setTimeout(() => {
+
+        alert("Puzzle berhasil diselesaikan!");
+
+    }, 200);
 
 }
 
-
 initPuzzle();
+
+
+/* =========================================================
+   HERO SWIPER
+   ========================================================= */
+
+new Swiper(".heroSwiper", {
+
+    loop: true,
+    speed: 800,
+    grabCursor: true,
+
+    autoplay: {
+        delay: 3500,
+        disableOnInteraction: false
+    },
+
+    pagination: {
+        el: ".swiper-pagination",
+        clickable: true
+    },
+
+    navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev"
+    }
+
+});
+
+
+/* =========================================================
+   CLICK SOUND
+   ========================================================= */
+
+const audioCtx = new (
+    window.AudioContext ||
+    window.webkitAudioContext
+)();
+
+function clickSound() {
+
+    if (audioCtx.state === "suspended") {
+        audioCtx.resume();
+    }
+
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+
+    osc.type = "triangle";
+    osc.frequency.value = 700;
+
+    gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(
+        0.0001,
+        audioCtx.currentTime + 0.05
+    );
+
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+
+    osc.start();
+    osc.stop(audioCtx.currentTime + 0.05);
+
+}
+
+document.addEventListener("click", e => {
+
+    if (
+        e.target.closest(".button") ||
+        e.target.closest(".tag") ||
+        e.target.closest(".cell") ||
+        e.target.closest(".tile") ||
+        e.target.closest(".social a") ||
+        e.target.closest(".puzzle-btn button")
+    ) {
+        clickSound();
+    }
+
+});
+
+
+/* =========================================================
+   BUTTON PRESS EFFECT
+   ========================================================= */
+
+document.querySelectorAll(".button").forEach(button => {
+
+    button.addEventListener("mousedown", () => {
+        button.classList.add("pressed");
+    });
+
+    button.addEventListener("mouseup", () => {
+        button.classList.remove("pressed");
+    });
+
+    button.addEventListener("mouseleave", () => {
+        button.classList.remove("pressed");
+    });
+
+});
+
+
+/* =========================================================
+   PROTECTION
+   ========================================================= */
+
+document.addEventListener("contextmenu", e => e.preventDefault());
+document.addEventListener("selectstart", e => e.preventDefault());
+document.addEventListener("copy", e => e.preventDefault());
 
 </script>
 
