@@ -1171,10 +1171,185 @@ PHOTO PUZZLE
 }
 
 /*======================================
+CHECKER GAME
+======================================*/
+
+#checker{
+    padding:80px 0;
+}
+
+.checker-box{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:25px;
+    padding:35px;
+    background:var(--card);
+    border-radius:var(--radius-xl);
+    box-shadow:var(--outer);
+}
+
+.checker-grid{
+    width:560px;
+    height:100%;  
+    grid-template-rows:repeat(8,1fr); 
+    aspect-ratio:1;
+    display:grid;
+    grid-template-columns:repeat(8,1fr);
+    gap:6px;
+    padding:20px;
+    border-radius:var(--radius-lg);
+    background:var(--bg);
+    box-shadow:var(--inset);
+}
+
+.checker-square{
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:10px;
+    cursor:pointer;
+    transition:var(--transition);
+}
+
+.checker-light{
+    background:rgba(255,255,255,.18);
+}
+
+.checker-dark{
+    background:rgba(0,0,0,.18);
+}
+
+.checker-selected{
+    outline: none;
+    outline-offset:-3px;
+}
+
+.checker-move{
+    position:relative;
+}
+
+.checker-move::after{
+    content:"";
+    width:14px;
+    height:14px;
+    border-radius:50%;
+    background: var(--gradient);
+    box-shadow: var(--inset);
+}
+
+.checker-piece{
+    width:70%;
+    height:70%;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+    font-weight:bold;
+}
+
+.checker-piece-blue{
+    outline: 1px solid white;
+    box-shadow: var(--outer);
+    background:#6c5ce7;
+    color:#444;
+}
+
+.checker-piece-pink{
+    outline: 1px solid white;
+    box-shadow: var(--outer);
+    background:#ff69b4;
+    color:#fff;
+}
+
+.checker-piece-king{
+    outline: 1px solid gold;
+    box-shadow: var(--outer);
+}
+
+.checker-controls{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.checker-button{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:12px 24px;
+    border:none;
+    border-radius:var(--radius-lg);
+    background:var(--card);
+    color:#fff;
+    font-family:var(--font);
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+    box-shadow:var(--outer);
+    transition:var(--transition);
+}
+
+.checker-button:active{
+    box-shadow:var(--inset);
+    transform:scale(.97);
+}
+
+.checker-status{
+    text-align:center;
+    font-size:18px;
+    font-weight:600;
+    color:#fff;
+    letter-spacing:.5px;
+}
+
+/*======================================
+CHECKER RESPONSIVE
+======================================*/
+
+@media(max-width:768px){
+
+    .checker-box{
+        padding:22px;
+    }
+
+    .checker-grid{
+        width:100%;
+        max-width:420px;
+        padding:12px;
+        gap:4px;
+    }
+
+    .checker-piece{
+        font-size:18px;
+    }
+
+    .checker-controls{
+        width:100%;
+    }
+
+    .checker-button{
+        flex:1;
+        justify-content:center;
+        min-width:100px;
+    }
+
+    .checker-status{
+        font-size:16px;
+    }
+
+}
+
+/*======================================
 RESPONSIVE 
 ======================================*/
 
 @media(max-width:992px){
+
     .hero-grid,
     .analytics-grid,
     .place-grid{
@@ -1336,6 +1511,8 @@ RESPONSIVE
     footer{
         padding:40px 0;
     }
+
+    #checker{
 }
 
 </style>
@@ -1881,6 +2058,57 @@ RESPONSIVE
 
 <!-- End Photo Puzzle -->
 
+<!-- Checker Game -->
+
+<section id="checker">
+
+    <div class="container">
+
+        <div class="section-title">
+            <h2>
+                <i class="fa-solid fa-chess-board"></i>
+                Checker Game
+            </h2>
+
+            <p>
+                Permainan strategi klasik untuk dimainkan bersama.
+            </p>
+        </div>
+
+        <div class="checker-box">
+
+            <div id="checkerBoard" class="checker-grid"></div>
+
+            <div class="checker-controls">
+
+                <button id="checkerUndo" class="checker-button">
+                    <i class="fa-solid fa-rotate-left"></i>
+                    Undo
+                </button>
+
+                <button id="checkerReset" class="checker-button">
+                    <i class="fa-solid fa-rotate"></i>
+                    Reset
+                </button>
+
+                <button id="checkerRedo" class="checker-button">
+                    <i class="fa-solid fa-rotate-right"></i>
+                    Redo
+                </button>
+
+            </div>
+
+            <div id="checkerStatus" class="checker-status">
+                Giliran Blue
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- End Checker Game -->
 
 <!-- Footer -->
 
@@ -2474,44 +2702,125 @@ const audioCtx = new (
     window.webkitAudioContext
 )();
 
-function clickSound() {
 
-    if (audioCtx.state === "suspended") {
-        audioCtx.resume();
-    }
+function playTone(
+    freq=700,
+    duration=0.05,
+    type="triangle"
+){
 
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
+if(audioCtx.state==="suspended"){
+    audioCtx.resume();
+}
 
-    osc.type = "triangle";
-    osc.frequency.value = 700;
 
-    gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(
-        0.0001,
-        audioCtx.currentTime + 0.05
-    );
+const osc=audioCtx.createOscillator();
+const gain=audioCtx.createGain();
 
-    osc.connect(gain);
-    gain.connect(audioCtx.destination);
 
-    osc.start();
-    osc.stop(audioCtx.currentTime + 0.05);
+osc.type=type;
+osc.frequency.value=freq;
+
+
+gain.gain.setValueAtTime(
+0.08,
+audioCtx.currentTime
+);
+
+
+gain.gain.exponentialRampToValueAtTime(
+0.0001,
+audioCtx.currentTime+duration
+);
+
+
+osc.connect(gain);
+gain.connect(audioCtx.destination);
+
+
+osc.start();
+
+osc.stop(
+audioCtx.currentTime+duration
+);
 
 }
 
-document.addEventListener("click", e => {
 
-    if (
-        e.target.closest(".button") ||
-        e.target.closest(".tag") ||
-        e.target.closest(".cell") ||
-        e.target.closest(".tile") ||
-        e.target.closest(".social a") ||
-        e.target.closest(".puzzle-btn button")
-    ) {
-        clickSound();
-    }
+/*====================
+BUTTON SOUND
+====================*/
+
+function clickSound(){
+
+playTone(
+700,
+0.05,
+"triangle"
+);
+
+}
+
+
+/*====================
+CHECKER SOUND
+====================*/
+
+
+function checkerSelectSound(){
+
+playTone(
+500,
+0.06,
+"sine"
+);
+
+}
+
+
+function checkerMoveSound(){
+
+playTone(
+350,
+0.08,
+"triangle"
+);
+
+}
+
+
+function checkerCaptureSound(){
+
+playTone(
+180,
+0.15,
+"sawtooth"
+);
+
+}
+
+
+
+/*====================
+GLOBAL BUTTON CLICK
+====================*/
+
+
+document.addEventListener("click",e=>{
+
+if(
+e.target.closest(".button") ||
+e.target.closest(".tag") ||
+e.target.closest(".cell") ||
+e.target.closest(".tile") ||
+e.target.closest(".social a") ||
+e.target.closest(".puzzle-btn button") ||
+e.target.closest(".checker-button")
+){
+
+clickSound();
+
+}
 
 });
 
@@ -2544,6 +2853,648 @@ document.querySelectorAll(".button").forEach(button => {
 document.addEventListener("contextmenu", e => e.preventDefault());
 document.addEventListener("selectstart", e => e.preventDefault());
 document.addEventListener("copy", e => e.preventDefault());
+
+</script>
+
+<script>
+/*==============================
+CHECKER CONFIG
+==============================*/
+
+const checkerBoard=document.getElementById("checkerBoard"),
+checkerStatus=document.getElementById("checkerStatus"),
+checkerUndoBtn=document.getElementById("checkerUndo"),
+checkerRedoBtn=document.getElementById("checkerRedo"),
+checkerResetBtn=document.getElementById("checkerReset");
+
+const CHECKER_SIZE=8;
+
+const checkerDir=[
+[1,1],
+[1,-1],
+[-1,1],
+[-1,-1]
+];
+
+const checkerInside=(x,y)=>
+x>=0&&x<CHECKER_SIZE&&
+y>=0&&y<CHECKER_SIZE;
+
+const checkerClone=data=>
+JSON.parse(JSON.stringify(data));
+
+/*==============================
+CHECKER GAME STATE
+==============================*/
+
+let checkerData=[],
+checkerTurn=Math.random()<.5?"blue":"pink",
+checkerSelected=null,
+checkerLegal=[],
+checkerHistory=[],
+checkerFuture=[];
+
+/*==================================
+CHECKER CREATE BOARD
+==================================*/
+
+function checkerCreateBoard(){
+
+checkerData=[];
+for(let y=0;y<8;y++){
+checkerData[y]=[];
+for(let x=0;x<8;x++){
+checkerData[y][x]=null;
+if((x+y)%2){
+if(y<3){
+
+checkerData[y][x]={
+color:"pink",
+king:false
+};
+
+}else if(y>4){
+
+checkerData[y][x]={
+color:"blue",
+king:false
+};
+
+}
+}
+}
+}
+
+checkerSelected=null;
+checkerLegal=[];
+checkerHistory=[];
+checkerFuture=[];
+
+}
+
+/*==============================
+CHECKER MOVE ENGINE
+==============================*/
+
+function checkerGetMoves(x,y){
+
+const piece=checkerData[y][x];
+
+if(!piece)return[];
+
+const moves=[];
+
+
+/* KING bisa jalan jauh */
+if(piece.king){
+
+for(const[dx,dy] of checkerDir){
+
+let nx=x+dx;
+let ny=y+dy;
+
+
+while(checkerInside(nx,ny)&&!checkerData[ny][nx]){
+
+moves.push({
+x:nx,
+y:ny,
+remove:null
+});
+
+
+nx+=dx;
+ny+=dy;
+
+}
+
+}
+
+
+return moves;
+
+}
+
+
+/* BIDAK BIASA hanya maju */
+
+const dirs=piece.color=="blue"
+?[[-1,-1],[1,-1]]
+:[[-1,1],[1,1]];
+
+
+for(const[dx,dy] of dirs){
+
+const nx=x+dx;
+const ny=y+dy;
+
+
+if(
+checkerInside(nx,ny)&&
+!checkerData[ny][nx]
+){
+
+moves.push({
+x:nx,
+y:ny,
+remove:null
+});
+
+}
+
+}
+
+
+return moves;
+
+}
+
+/*==============================
+CHECKER CAPTURE ENGINE
+==============================*/
+
+function checkerGetCaptures(x,y){
+
+const piece=checkerData[y][x];
+
+if(!piece)return[];
+
+const captures=[];
+
+
+/* ======================
+KING MAKAN JAUH
+====================== */
+
+if(piece.king){
+
+for(const[dx,dy] of checkerDir){
+
+let nx=x+dx;
+let ny=y+dy;
+
+let enemy=null;
+
+
+/* cari musuh pertama */
+
+while(checkerInside(nx,ny)){
+
+if(checkerData[ny][nx]){
+
+if(checkerData[ny][nx].color!=piece.color){
+
+enemy={
+x:nx,
+y:ny
+};
+
+}
+
+break;
+
+}
+
+
+nx+=dx;
+ny+=dy;
+
+}
+
+
+
+/* kalau ada musuh cari tempat mendarat */
+
+if(enemy){
+
+let lx=enemy.x+dx;
+let ly=enemy.y+dy;
+
+
+while(
+checkerInside(lx,ly)&&
+!checkerData[ly][lx]
+){
+
+captures.push({
+
+x:lx,
+y:ly,
+
+remove:{
+x:enemy.x,
+y:enemy.y
+}
+
+});
+
+
+lx+=dx;
+ly+=dy;
+
+}
+
+}
+
+}
+
+
+return captures;
+
+}
+
+
+/* ======================
+BIDAK BIASA MAKAN MAJU MUNDUR
+====================== */
+
+
+for(const[dx,dy] of checkerDir){
+
+const mx=x+dx;
+const my=y+dy;
+
+const lx=x+dx*2;
+const ly=y+dy*2;
+
+
+if(
+checkerInside(mx,my)&&
+checkerInside(lx,ly)&&
+
+checkerData[my][mx]&&
+checkerData[my][mx].color!=piece.color&&
+
+!checkerData[ly][lx]
+){
+
+captures.push({
+
+x:lx,
+y:ly,
+
+remove:{
+x:mx,
+y:my
+}
+
+});
+
+}
+
+}
+
+
+return captures;
+
+}
+
+/*==============================
+CHECKER APPLY MOVE
+==============================*/
+
+function checkerApplyMove(move){
+
+checkerHistory.push(checkerClone(checkerData));
+checkerFuture=[];
+
+
+const piece=checkerData[
+checkerSelected.y
+][
+checkerSelected.x
+];
+
+
+// pindahkan bidak
+checkerData[
+move.y
+][
+move.x
+]=piece;
+
+
+checkerData[
+checkerSelected.y
+][
+checkerSelected.x
+]=null;
+
+
+if(move.remove){
+
+checkerData[
+move.remove.y
+][
+move.remove.x
+]=null;
+
+checkerCaptureSound();
+
+}else{
+
+checkerMoveSound();
+
+}
+
+
+// jadi raja
+if(
+piece.color=="blue"&&
+move.y==0
+){
+
+piece.king=true;
+
+}
+
+
+if(
+piece.color=="pink"&&
+move.y==CHECKER_SIZE-1
+){
+
+piece.king=true;
+
+}
+
+
+// ==========================
+// MULTI CAPTURE
+// ==========================
+
+if(move.remove){
+
+const nextCaptures=
+checkerGetCaptures(
+move.x,
+move.y
+);
+
+
+if(nextCaptures.length){
+
+checkerSelected={
+x:move.x,
+y:move.y
+};
+
+
+checkerLegal=nextCaptures;
+
+
+checkerRender();
+
+return;
+
+}
+
+}
+
+
+// ==========================
+// GANTI GILIRAN
+// ==========================
+
+checkerSelected=null;
+checkerLegal=[];
+
+
+checkerTurn=
+checkerTurn=="blue"
+?"pink"
+:"blue";
+
+
+checkerStatus.textContent=
+`Giliran ${checkerTurn=="blue"?"Blue":"Pink"}`;
+
+
+checkerRender();
+
+checkerCheckWinner();
+
+}
+
+/*==============================
+CHECKER WINNER
+==============================*/
+
+function checkerCheckWinner(){
+
+let blue=0,
+pink=0;
+
+for(let y=0;y<CHECKER_SIZE;y++)
+for(let x=0;x<CHECKER_SIZE;x++){
+
+const piece=checkerData[y][x];
+
+if(!piece)continue;
+
+piece.color=="blue"
+?blue++
+:pink++;
+
+}
+
+if(!blue){
+
+checkerStatus.textContent="Player Pink Menang!";
+return;
+
+}
+
+if(!pink){
+
+checkerStatus.textContent="Player Blue Menang!";
+
+}
+
+}
+
+/*==============================
+CHECKER UNDO / REDO
+==============================*/
+
+function checkerUndo(){
+
+if(!checkerHistory.length)return;
+
+checkerFuture.push(checkerClone(checkerData));
+
+checkerData=checkerHistory.pop();
+
+checkerSelected=null;
+checkerLegal=[];
+
+checkerTurn=
+checkerTurn=="blue"
+?"pink"
+:"blue";
+
+checkerStatus.textContent=
+`Giliran ${checkerTurn=="blue"?"Blue":"Pink"}`;
+
+checkerRender();
+
+}
+
+function checkerRedo(){
+
+if(!checkerFuture.length)return;
+
+checkerHistory.push(checkerClone(checkerData));
+
+checkerData=checkerFuture.pop();
+
+checkerSelected=null;
+checkerLegal=[];
+
+checkerTurn=
+checkerTurn=="blue"
+?"pink"
+:"blue";
+
+checkerStatus.textContent=
+`Giliran ${checkerTurn=="blue"?"Blue":"Pink"}`;
+
+checkerRender();
+
+}
+
+checkerUndoBtn.onclick=checkerUndo;
+checkerRedoBtn.onclick=checkerRedo;
+
+/*==============================
+CHECKER RENDER
+==============================*/
+
+function checkerRender(){
+
+checkerBoard.innerHTML="";
+
+checkerStatus.textContent=
+`Giliran ${checkerTurn=="blue"?"Blue":"Pink"}`;
+
+for(let y=0;y<CHECKER_SIZE;y++)
+for(let x=0;x<CHECKER_SIZE;x++){
+
+const square=document.createElement("div"),
+piece=checkerData[y][x];
+
+square.className=
+`checker-square ${
+((x+y)&1)
+?"checker-dark"
+:"checker-light"
+}`;
+
+square.dataset.x=x;
+square.dataset.y=y;
+
+if(
+checkerSelected&&
+checkerSelected.x==x&&
+checkerSelected.y==y
+){
+square.classList.add("checker-selected");
+}
+
+if(
+checkerLegal.some(m=>m.x==x&&m.y==y)
+){
+square.classList.add("checker-move");
+}
+
+if(piece){
+
+const coin=document.createElement("div");
+
+coin.className=
+`checker-piece ${
+piece.color=="blue"
+?"checker-piece-blue"
+:"checker-piece-pink"
+}`;
+
+if(piece.king){
+
+coin.classList.add("checker-piece-king");
+coin.innerHTML='<i class="fa-solid fa-crown"></i>';
+
+}
+
+square.appendChild(coin);
+
+}
+
+checkerBoard.appendChild(square);
+
+}
+
+}
+
+/*==============================
+CHECKER INPUT
+==============================*/
+
+checkerBoard.onclick=e=>{
+
+const cell=e.target.closest(".checker-square");
+if(!cell)return;
+
+const x=+cell.dataset.x;
+const y=+cell.dataset.y;
+
+const piece=checkerData[y][x];
+
+/* Pilih Bidak */
+
+if(piece&&piece.color===checkerTurn){
+
+checkerSelectSound();
+
+checkerSelected={
+x,y
+};
+
+checkerLegal=checkerGetCaptures(x,y);
+
+if(!checkerLegal.length)
+checkerLegal=checkerGetMoves(x,y);
+
+checkerRender();
+
+return;
+
+}
+
+/* Jalankan Langkah */
+
+const move=checkerLegal.find(m=>m.x==x&&m.y==y);
+
+if(!move)return;
+
+checkerApplyMove(move);
+
+};
+
+checkerCreateBoard();
+checkerRender();
+
+checkerResetBtn.onclick=()=>{
+
+checkerCreateBoard();
+
+checkerTurn=Math.random()<.5?"blue":"pink";
+
+checkerStatus.textContent=
+`Giliran ${checkerTurn=="blue"?"Blue":"Pink"}`;
+
+checkerRender();
+
+};
 
 </script>
 
