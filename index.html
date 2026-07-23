@@ -90,12 +90,12 @@ ROOT & RESET
     --radius-xl:30px;
 
     --outer:
-        3px 3px 4px rgba(0,0,0,.6),
-        -3px -3px 4px rgba(255,255,255,.3);
-
+        2px 2px 2px rgba(0,0,0,.7), 
+        -2px -2px 2px rgba(255,255,255,.3); 
+ 
     --inset:
-        inset 3px 3px 4px rgba(0,0,0,.6),
-        inset -3px -3px 4px rgba(255,255,255,.3);
+        inset 2px 2px 2px rgba(0,0,0,.7),
+        inset -2px -2px 2px rgba(255,255,255,.3);
 
     --transition:.35s;
 }
@@ -126,6 +126,28 @@ h1,h2,h3,h4,h5,h6,
 p,span,small,a,
 i{
     color:#fff;
+}
+
+body.dark{
+
+--bg:linear-gradient(125deg,#2d1b69,#6a1b5d);
+--card:linear-gradient(125deg,#2d1b69,#6a1b5d);
+
+--text:#f5f5f5;
+--text-light:rgba(255,255,255,.7);
+--white:#fff;
+
+    --outer:
+        2px 2px 2px rgba(0,0,0,.7), 
+        -2px -2px 2px rgba(255,255,255,.3); 
+ 
+    --inset:
+        inset 2px 2px 2px rgba(0,0,0,.7),
+        inset -2px -2px 2px rgba(255,255,255,.3);
+
+background:var(--bg);
+color:var(--text);
+
 }
 
 .card i,
@@ -1035,6 +1057,130 @@ LOVE RAIN
 
 }
 
+/*======================================
+HEADER
+======================================*/
+
+.header{
+position:fixed;
+top:0;
+left:0;
+right:0;
+height:90px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:0 30px;
+background:var(--card);
+box-shadow:var(--outer);
+z-index:1000;
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:12px;
+font-size:1.5rem;
+font-weight:700;
+color:var(--text);
+text-decoration:none;
+}
+
+.logo i{
+font-size:1.8rem;
+color:var(--primary);
+}
+
+
+/*======================================
+HEADER ACTIONS
+======================================*/
+
+.header-actions{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.icon-btn{
+width:46px;
+height:46px;
+display:flex;
+justify-content:center;
+align-items:center;
+border:none;
+outline:none;
+border-radius:50%;
+background:var(--card);
+box-shadow:var(--outer);
+color:var(--text);
+font-size:1.1rem;
+cursor:pointer;
+transition:.25s;
+}
+
+.icon-btn:active{
+box-shadow: var(--inset);
+}
+
+/*======================================
+PAGE
+======================================*/
+
+.main-page{
+display:block;
+padding-top:110px;
+}
+
+.main-page.hide{
+display:none;
+}
+
+.games-page{
+display:none;
+padding-top:110px;
+}
+
+.games-page.active{
+display:block;
+}
+
+
+/*======================================
+RESPONSIVE
+======================================*/
+
+@media(max-width:768px){
+
+.header{
+height:80px;
+padding:0 20px;
+}
+
+.logo{
+font-size:1.2rem;
+}
+
+.logo i{
+font-size:1.5rem;
+}
+
+.header-actions{
+gap:10px;
+}
+
+.icon-btn{
+width:42px;
+height:42px;
+font-size:1rem;
+}
+
+.main-page,
+.games-page{
+padding-top:95px;
+}
+
+}
 
 /*======================================
 GAMES
@@ -1519,12 +1665,36 @@ RESPONSIVE
 </head>
 <body oncontextmenu="return false;" oncopy="return false;" onselectstart="return false;">
 
+<header class="header">
+    <a href="#" class="logo">
+        <i class="fa-solid fa-heart"></i>
+        <h2>Beloved</h2>
+    </a>
+    <div class="header-actions">
+        <button id="homeBtn" class="icon-btn">
+            <i class="fa-solid fa-house"></i>
+        </button>
+        <button id="gameBtn" class="icon-btn">
+            <i class="fa-solid fa-gamepad"></i>
+        </button>
+        <button id="themeBtn" class="icon-btn">
+            <i class="fa-solid fa-moon"></i>
+        </button>
+    </div>
+</header>
+
+<button id="gamesFloat" class="games-float">
+    <i class="fa-solid fa-gamepad"></i>
+</button>
+
+<div id="mainPage" class="main-page">
+
 <!-- Hero -->
 
 <section class="hero">
     <div class="container hero-grid">
         <div class="hero-content">
-            <h1>Every Love Story Deserves a Beautiful Journal.</h1>
+            <h1>Every Deserves a Beautiful Journal.</h1>
             <p>Semua kenangan, perjalanan, dan cerita cinta tersimpan dalam satu tempat yang elegan.</p>
             <a href="#" class="button" id="loveBtn">Click Here</a>
         </div>
@@ -1996,8 +2166,11 @@ RESPONSIVE
     </div>
 </section>
 
+</div>
+
 <!-- End Relationship Analytics -->
 
+<div id="gamesPage" class="games-page">
 
 <!-- Tic Tac Toe -->
 
@@ -2097,6 +2270,8 @@ RESPONSIVE
 
 <!-- End Checker Game -->
 
+</div>
+
 <!-- Footer -->
 
 <footer>
@@ -2119,6 +2294,48 @@ RESPONSIVE
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 <script>
+homeBtn.onclick=()=>{
+
+mainPage.classList.remove("hide");
+gamesPage.classList.remove("active");
+
+};
+
+gameBtn.onclick=()=>{
+
+mainPage.classList.add("hide");
+gamesPage.classList.add("active");
+
+};
+
+let darkMode=localStorage.getItem("theme")==="dark";
+
+if(darkMode){
+
+document.body.classList.add("dark");
+
+themeBtn.innerHTML='<i class="fa-solid fa-sun"></i>';
+
+}
+
+themeBtn.onclick=()=>{
+
+clickSound();
+
+darkMode=!darkMode;
+
+document.body.classList.toggle("dark");
+
+themeBtn.innerHTML=darkMode
+?'<i class="fa-solid fa-sun"></i>'
+:'<i class="fa-solid fa-moon"></i>';
+
+localStorage.setItem(
+"theme",
+darkMode?"dark":"light"
+);
+
+};
 
 /* =========================================================
    LOVE CHART
@@ -2849,7 +3066,8 @@ e.target.closest(".cell") ||
 e.target.closest(".tile") ||
 e.target.closest(".social a") ||
 e.target.closest(".puzzle-btn button") ||
-e.target.closest(".checker-button")
+e.target.closest(".checker-button") ||
+e.target.closest(".icon-btn")
 ){
 
 clickSound();
