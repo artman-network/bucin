@@ -2061,51 +2061,38 @@ RESPONSIVE
 <!-- Checker Game -->
 
 <section id="checker">
-
     <div class="container">
-
         <div class="section-title">
             <h2>
                 <i class="fa-solid fa-chess-board"></i>
                 Checker Game
             </h2>
-
             <p>
                 Permainan strategi klasik untuk dimainkan bersama.
             </p>
         </div>
 
         <div class="checker-box">
-
             <div id="checkerBoard" class="checker-grid"></div>
-
             <div class="checker-controls">
-
                 <button id="checkerUndo" class="checker-button">
                     <i class="fa-solid fa-rotate-left"></i>
                     Undo
                 </button>
-
                 <button id="checkerReset" class="checker-button">
                     <i class="fa-solid fa-rotate"></i>
                     Reset
                 </button>
-
                 <button id="checkerRedo" class="checker-button">
                     <i class="fa-solid fa-rotate-right"></i>
                     Redo
                 </button>
-
             </div>
-
             <div id="checkerStatus" class="checker-status">
                 Giliran Blue
             </div>
-
         </div>
-
     </div>
-
 </section>
 
 <!-- End Checker Game -->
@@ -2497,170 +2484,217 @@ drawBoard();
    IMAGE PUZZLE
    ========================================================= */
 
-const puzzleBoard = document.getElementById("puzzleBoard");
+const puzzleBoard=document.getElementById("puzzleBoard");
 
-const imageURL =
-    "https://i.ibb.co.com/spTFVpH1/file-0000000037f07209951fcde1c4910603.png";
 
-let puzzle = [];
-let emptyIndex = 8;
+const images=[
 
-function initPuzzle() {
+"https://i.ibb.co.com/spTFVpH1/file-0000000037f07209951fcde1c4910603.png",
 
-    puzzle = [
-        0, 1, 2,
-        3, 4, 5,
-        6, 7, 8
-    ];
+"https://i.ibb.co.com/RpTsb1Qr/file-00000000da50720991d40515febe24a7.png",
 
-    emptyIndex = 8;
+"https://i.ibb.co.com/QFfxcj1M/file-0000000077cc7209ba25fd7806b3a5c6.png"
 
-    renderPuzzle();
+];
 
-}
+let currentImage=0;
 
-function renderPuzzle() {
+let puzzle=[];
+let emptyIndex=8;
 
-    puzzleBoard.innerHTML = "";
 
-    puzzle.forEach((value, index) => {
 
-        const tile = document.createElement("div");
+function initPuzzle(){
 
-        tile.className = "tile";
+puzzle=[
+0,1,2,
+3,4,5,
+6,7,8
+];
 
-        if (value === 8) {
+emptyIndex=8;
 
-            tile.classList.add("empty");
-
-        } else {
-
-            const x = (value % 3) * 50;
-            const y = Math.floor(value / 3) * 50;
-
-            tile.style.backgroundImage =
-                `url(${imageURL})`;
-
-            tile.style.backgroundPosition =
-                `${x}% ${y}%`;
-
-        }
-
-        tile.addEventListener("click", () => {
-            moveTile(index);
-        });
-
-        puzzleBoard.appendChild(tile);
-
-    });
+renderPuzzle();
 
 }
 
-function moveTile(index) {
 
-    const row = Math.floor(index / 3);
-    const col = index % 3;
 
-    const emptyRow = Math.floor(emptyIndex / 3);
-    const emptyCol = emptyIndex % 3;
+function renderPuzzle(){
 
-    const distance =
-        Math.abs(row - emptyRow) +
-        Math.abs(col - emptyCol);
+puzzleBoard.innerHTML="";
 
-    if (distance !== 1) {
-        return;
-    }
+puzzle.forEach((value,index)=>{
 
-    [
-        puzzle[index],
-        puzzle[emptyIndex]
-    ] = [
-        puzzle[emptyIndex],
-        puzzle[index]
-    ];
+const tile=document.createElement("div");
 
-    emptyIndex = index;
+tile.className="tile";
 
-    renderPuzzle();
 
-    checkWin();
+if(value===8){
 
-}
+tile.classList.add("empty");
 
-function shufflePuzzle() {
+}else{
 
-    const moves = 150;
+const x=(value%3)*50;
+const y=Math.floor(value/3)*50;
 
-    for (let i = 0; i < moves; i++) {
 
-        const possible = [];
+tile.style.backgroundImage=
+`url(${images[currentImage]})`;
 
-        const row = Math.floor(emptyIndex / 3);
-        const col = emptyIndex % 3;
 
-        if (row > 0) {
-            possible.push(emptyIndex - 3);
-        }
-
-        if (row < 2) {
-            possible.push(emptyIndex + 3);
-        }
-
-        if (col > 0) {
-            possible.push(emptyIndex - 1);
-        }
-
-        if (col < 2) {
-            possible.push(emptyIndex + 1);
-        }
-
-        const random =
-            possible[
-                Math.floor(
-                    Math.random() * possible.length
-                )
-            ];
-
-        [
-            puzzle[random],
-            puzzle[emptyIndex]
-        ] = [
-            puzzle[emptyIndex],
-            puzzle[random]
-        ];
-
-        emptyIndex = random;
-
-    }
-
-    renderPuzzle();
+tile.style.backgroundPosition=
+`${x}% ${y}%`;
 
 }
 
-function resetPuzzle() {
 
-    initPuzzle();
+tile.onclick=()=>moveTile(index);
+
+
+puzzleBoard.appendChild(tile);
+
+});
+
+}
+
+
+
+
+function moveTile(index){
+
+const row=Math.floor(index/3);
+const col=index%3;
+
+
+const emptyRow=Math.floor(emptyIndex/3);
+const emptyCol=emptyIndex%3;
+
+
+const distance=
+Math.abs(row-emptyRow)+
+Math.abs(col-emptyCol);
+
+
+if(distance!==1)return;
+
+
+
+[puzzle[index],puzzle[emptyIndex]]=
+[puzzle[emptyIndex],puzzle[index]];
+
+
+emptyIndex=index;
+
+
+renderPuzzle();
+
+checkWin();
 
 }
 
-function checkWin() {
 
-    const win = puzzle.every((value, index) => {
-        return value === index;
-    });
 
-    if (!win) {
-        return;
-    }
 
-    setTimeout(() => {
+function shufflePuzzle(){
 
-        alert("Puzzle berhasil diselesaikan!");
+for(let i=0;i<150;i++){
 
-    }, 200);
+const possible=[];
+
+const row=Math.floor(emptyIndex/3);
+const col=emptyIndex%3;
+
+
+if(row>0)
+possible.push(emptyIndex-3);
+
+if(row<2)
+possible.push(emptyIndex+3);
+
+if(col>0)
+possible.push(emptyIndex-1);
+
+if(col<2)
+possible.push(emptyIndex+1);
+
+
+
+const random=
+possible[
+Math.floor(Math.random()*possible.length)
+];
+
+
+[puzzle[random],puzzle[emptyIndex]]=
+[puzzle[emptyIndex],puzzle[random]];
+
+
+emptyIndex=random;
 
 }
+
+
+renderPuzzle();
+
+}
+
+
+
+function nextImage(){
+
+currentImage++;
+
+if(currentImage>=images.length){
+
+currentImage=0;
+
+}
+
+
+initPuzzle();
+
+shufflePuzzle();
+
+}
+
+
+
+
+function checkWin(){
+
+const win=puzzle.every(
+(value,index)=>value===index
+);
+
+
+if(!win)return;
+
+
+setTimeout(()=>{
+
+alert("Puzzle selesai!");
+
+
+nextImage();
+
+
+},500);
+
+
+}
+
+
+
+function resetPuzzle(){
+
+initPuzzle();
+
+}
+
+
 
 initPuzzle();
 
@@ -2854,38 +2888,25 @@ document.addEventListener("contextmenu", e => e.preventDefault());
 document.addEventListener("selectstart", e => e.preventDefault());
 document.addEventListener("copy", e => e.preventDefault());
 
-</script>
-
-<script>
-/*==============================
-CHECKER CONFIG
-==============================*/
-
+/* =========================================================
+   CHECKER CONFIG 
+   ========================================================= */
+   
 const checkerBoard=document.getElementById("checkerBoard"),
 checkerStatus=document.getElementById("checkerStatus"),
 checkerUndoBtn=document.getElementById("checkerUndo"),
 checkerRedoBtn=document.getElementById("checkerRedo"),
 checkerResetBtn=document.getElementById("checkerReset");
 
-const CHECKER_SIZE=8;
-
-const checkerDir=[
-[1,1],
-[1,-1],
-[-1,1],
-[-1,-1]
-];
+const CHECKER_SIZE=8,
+checkerDir=[[1,1],[1,-1],[-1,1],[-1,-1]];
 
 const checkerInside=(x,y)=>
-x>=0&&x<CHECKER_SIZE&&
-y>=0&&y<CHECKER_SIZE;
+x>=0&&x<CHECKER_SIZE&&y>=0&&y<CHECKER_SIZE;
 
-const checkerClone=data=>
-JSON.parse(JSON.stringify(data));
+const checkerClone=data=>JSON.parse(JSON.stringify(data));
 
-/*==============================
-CHECKER GAME STATE
-==============================*/
+const checkerText=()=>`Giliran ${checkerTurn=="blue"?"Blue":"Pink"}`;
 
 let checkerData=[],
 checkerTurn=Math.random()<.5?"blue":"pink",
@@ -2894,35 +2915,33 @@ checkerLegal=[],
 checkerHistory=[],
 checkerFuture=[];
 
-/*==================================
-CHECKER CREATE BOARD
-==================================*/
+
+/* CREATE */
 
 function checkerCreateBoard(){
 
 checkerData=[];
+
 for(let y=0;y<8;y++){
+
 checkerData[y]=[];
+
 for(let x=0;x<8;x++){
+
 checkerData[y][x]=null;
+
 if((x+y)%2){
-if(y<3){
 
-checkerData[y][x]={
-color:"pink",
-king:false
-};
+if(y<3)
+checkerData[y][x]={color:"pink",king:false};
 
-}else if(y>4){
-
-checkerData[y][x]={
-color:"blue",
-king:false
-};
+else if(y>4)
+checkerData[y][x]={color:"blue",king:false};
 
 }
+
 }
-}
+
 }
 
 checkerSelected=null;
@@ -2932,36 +2951,25 @@ checkerFuture=[];
 
 }
 
-/*==============================
-CHECKER MOVE ENGINE
-==============================*/
+
+/* MOVE */
 
 function checkerGetMoves(x,y){
 
-const piece=checkerData[y][x];
+const p=checkerData[y][x];
+if(!p)return[];
 
-if(!piece)return[];
+let moves=[];
 
-const moves=[];
+if(p.king){
 
+for(const[dx,dy]of checkerDir){
 
-/* KING bisa jalan jauh */
-if(piece.king){
-
-for(const[dx,dy] of checkerDir){
-
-let nx=x+dx;
-let ny=y+dy;
-
+let nx=x+dx,ny=y+dy;
 
 while(checkerInside(nx,ny)&&!checkerData[ny][nx]){
 
-moves.push({
-x:nx,
-y:ny,
-remove:null
-});
-
+moves.push({x:nx,y:ny,remove:null});
 
 nx+=dx;
 ny+=dy;
@@ -2970,91 +2978,55 @@ ny+=dy;
 
 }
 
-
 return moves;
 
 }
 
-
-/* BIDAK BIASA hanya maju */
-
-const dirs=piece.color=="blue"
+const dir=p.color=="blue"
 ?[[-1,-1],[1,-1]]
 :[[-1,1],[1,1]];
 
 
-for(const[dx,dy] of dirs){
+for(const[dx,dy]of dir){
 
-const nx=x+dx;
-const ny=y+dy;
+let nx=x+dx,ny=y+dy;
 
-
-if(
-checkerInside(nx,ny)&&
-!checkerData[ny][nx]
-){
-
-moves.push({
-x:nx,
-y:ny,
-remove:null
-});
+if(checkerInside(nx,ny)&&!checkerData[ny][nx])
+moves.push({x:nx,y:ny,remove:null});
 
 }
-
-}
-
 
 return moves;
 
 }
 
-/*==============================
-CHECKER CAPTURE ENGINE
-==============================*/
+
+/* CAPTURE */
 
 function checkerGetCaptures(x,y){
 
-const piece=checkerData[y][x];
+const p=checkerData[y][x];
+if(!p)return[];
 
-if(!piece)return[];
-
-const captures=[];
-
-
-/* ======================
-KING MAKAN JAUH
-====================== */
-
-if(piece.king){
-
-for(const[dx,dy] of checkerDir){
-
-let nx=x+dx;
-let ny=y+dy;
-
-let enemy=null;
+let result=[];
 
 
-/* cari musuh pertama */
+if(p.king){
+
+for(const[dx,dy]of checkerDir){
+
+let nx=x+dx,ny=y+dy,enemy=null;
 
 while(checkerInside(nx,ny)){
 
 if(checkerData[ny][nx]){
 
-if(checkerData[ny][nx].color!=piece.color){
-
-enemy={
-x:nx,
-y:ny
-};
-
-}
+if(checkerData[ny][nx].color!=p.color)
+enemy={x:nx,y:ny};
 
 break;
 
 }
-
 
 nx+=dx;
 ny+=dy;
@@ -3062,32 +3034,18 @@ ny+=dy;
 }
 
 
-
-/* kalau ada musuh cari tempat mendarat */
-
 if(enemy){
 
-let lx=enemy.x+dx;
-let ly=enemy.y+dy;
+let lx=enemy.x+dx,
+ly=enemy.y+dy;
 
+while(checkerInside(lx,ly)&&!checkerData[ly][lx]){
 
-while(
-checkerInside(lx,ly)&&
-!checkerData[ly][lx]
-){
-
-captures.push({
-
+result.push({
 x:lx,
 y:ly,
-
-remove:{
-x:enemy.x,
-y:enemy.y
-}
-
+remove:{x:enemy.x,y:enemy.y}
 });
-
 
 lx+=dx;
 ly+=dy;
@@ -3098,325 +3056,196 @@ ly+=dy;
 
 }
 
-
-return captures;
+return result;
 
 }
 
 
-/* ======================
-BIDAK BIASA MAKAN MAJU MUNDUR
-====================== */
+/* BIDAK BIASA */
 
+for(const[dx,dy]of checkerDir){
 
-for(const[dx,dy] of checkerDir){
-
-const mx=x+dx;
-const my=y+dy;
-
-const lx=x+dx*2;
-const ly=y+dy*2;
-
+let mx=x+dx,
+my=y+dy,
+lx=x+dx*2,
+ly=y+dy*2;
 
 if(
 checkerInside(mx,my)&&
 checkerInside(lx,ly)&&
-
 checkerData[my][mx]&&
-checkerData[my][mx].color!=piece.color&&
-
+checkerData[my][mx].color!=p.color&&
 !checkerData[ly][lx]
 ){
 
-captures.push({
-
+result.push({
 x:lx,
 y:ly,
-
-remove:{
-x:mx,
-y:my
-}
-
+remove:{x:mx,y:my}
 });
 
 }
 
 }
 
-
-return captures;
+return result;
 
 }
 
-/*==============================
-CHECKER APPLY MOVE
-==============================*/
+
+/* APPLY */
 
 function checkerApplyMove(move){
 
 checkerHistory.push(checkerClone(checkerData));
 checkerFuture=[];
 
+const p=checkerData[checkerSelected.y][checkerSelected.x];
 
-const piece=checkerData[
-checkerSelected.y
-][
-checkerSelected.x
-];
-
-
-// pindahkan bidak
-checkerData[
-move.y
-][
-move.x
-]=piece;
-
-
-checkerData[
-checkerSelected.y
-][
-checkerSelected.x
-]=null;
+checkerData[move.y][move.x]=p;
+checkerData[checkerSelected.y][checkerSelected.x]=null;
 
 
 if(move.remove){
 
-checkerData[
-move.remove.y
-][
-move.remove.x
-]=null;
-
+checkerData[move.remove.y][move.remove.x]=null;
 checkerCaptureSound();
 
-}else{
-
-checkerMoveSound();
-
-}
-
-
-// jadi raja
-if(
-piece.color=="blue"&&
-move.y==0
-){
-
-piece.king=true;
-
-}
+}else checkerMoveSound();
 
 
 if(
-piece.color=="pink"&&
-move.y==CHECKER_SIZE-1
-){
+(p.color=="blue"&&move.y==0)||
+(p.color=="pink"&&move.y==CHECKER_SIZE-1)
+)p.king=true;
 
-piece.king=true;
-
-}
-
-
-// ==========================
-// MULTI CAPTURE
-// ==========================
 
 if(move.remove){
 
-const nextCaptures=
-checkerGetCaptures(
-move.x,
-move.y
-);
+const next=checkerGetCaptures(move.x,move.y);
 
+if(next.length){
 
-if(nextCaptures.length){
-
-checkerSelected={
-x:move.x,
-y:move.y
-};
-
-
-checkerLegal=nextCaptures;
-
-
+checkerSelected={x:move.x,y:move.y};
+checkerLegal=next;
 checkerRender();
-
 return;
 
 }
 
 }
 
-
-// ==========================
-// GANTI GILIRAN
-// ==========================
 
 checkerSelected=null;
 checkerLegal=[];
 
-
-checkerTurn=
-checkerTurn=="blue"
-?"pink"
-:"blue";
-
-
-checkerStatus.textContent=
-`Giliran ${checkerTurn=="blue"?"Blue":"Pink"}`;
-
+checkerTurn=checkerTurn=="blue"?"pink":"blue";
 
 checkerRender();
-
 checkerCheckWinner();
 
 }
 
-/*==============================
-CHECKER WINNER
-==============================*/
+
+/* WINNER */
 
 function checkerCheckWinner(){
 
-let blue=0,
-pink=0;
+let blue=0,pink=0;
 
-for(let y=0;y<CHECKER_SIZE;y++)
-for(let x=0;x<CHECKER_SIZE;x++){
+checkerData.flat().forEach(p=>{
+if(p)
+p.color=="blue"?blue++:pink++;
+});
 
-const piece=checkerData[y][x];
 
-if(!piece)continue;
-
-piece.color=="blue"
-?blue++
-:pink++;
-
-}
-
-if(!blue){
-
+if(!blue)
 checkerStatus.textContent="Player Pink Menang!";
-return;
 
-}
-
-if(!pink){
-
+if(!pink)
 checkerStatus.textContent="Player Blue Menang!";
 
 }
 
-}
 
-/*==============================
-CHECKER UNDO / REDO
-==============================*/
+/* HISTORY */
 
 function checkerUndo(){
 
 if(!checkerHistory.length)return;
 
 checkerFuture.push(checkerClone(checkerData));
-
 checkerData=checkerHistory.pop();
+
+checkerTurn=checkerTurn=="blue"?"pink":"blue";
 
 checkerSelected=null;
 checkerLegal=[];
 
-checkerTurn=
-checkerTurn=="blue"
-?"pink"
-:"blue";
-
-checkerStatus.textContent=
-`Giliran ${checkerTurn=="blue"?"Blue":"Pink"}`;
-
 checkerRender();
 
 }
+
 
 function checkerRedo(){
 
 if(!checkerFuture.length)return;
 
 checkerHistory.push(checkerClone(checkerData));
-
 checkerData=checkerFuture.pop();
+
+checkerTurn=checkerTurn=="blue"?"pink":"blue";
 
 checkerSelected=null;
 checkerLegal=[];
-
-checkerTurn=
-checkerTurn=="blue"
-?"pink"
-:"blue";
-
-checkerStatus.textContent=
-`Giliran ${checkerTurn=="blue"?"Blue":"Pink"}`;
 
 checkerRender();
 
 }
 
+
 checkerUndoBtn.onclick=checkerUndo;
 checkerRedoBtn.onclick=checkerRedo;
 
-/*==============================
-CHECKER RENDER
-==============================*/
+
+/* RENDER */
 
 function checkerRender(){
 
 checkerBoard.innerHTML="";
+checkerStatus.textContent=checkerText();
 
-checkerStatus.textContent=
-`Giliran ${checkerTurn=="blue"?"Blue":"Pink"}`;
 
-for(let y=0;y<CHECKER_SIZE;y++)
-for(let x=0;x<CHECKER_SIZE;x++){
+for(let y=0;y<8;y++)
+for(let x=0;x<8;x++){
 
 const square=document.createElement("div"),
 piece=checkerData[y][x];
 
 square.className=
-`checker-square ${
-((x+y)&1)
-?"checker-dark"
-:"checker-light"
-}`;
+`checker-square ${((x+y)&1)?"checker-dark":"checker-light"}`;
 
 square.dataset.x=x;
 square.dataset.y=y;
 
-if(
-checkerSelected&&
-checkerSelected.x==x&&
-checkerSelected.y==y
-){
-square.classList.add("checker-selected");
-}
 
 if(
-checkerLegal.some(m=>m.x==x&&m.y==y)
-){
+checkerSelected?.x==x&&
+checkerSelected?.y==y
+)
+square.classList.add("checker-selected");
+
+
+if(checkerLegal.some(m=>m.x==x&&m.y==y))
 square.classList.add("checker-move");
-}
+
 
 if(piece){
 
 const coin=document.createElement("div");
 
 coin.className=
-`checker-piece ${
-piece.color=="blue"
-?"checker-piece-blue"
-:"checker-piece-pink"
-}`;
+`checker-piece checker-piece-${piece.color}`;
 
 if(piece.king){
 
@@ -3435,29 +3264,25 @@ checkerBoard.appendChild(square);
 
 }
 
-/*==============================
-CHECKER INPUT
-==============================*/
+
+/* INPUT */
 
 checkerBoard.onclick=e=>{
 
 const cell=e.target.closest(".checker-square");
 if(!cell)return;
 
-const x=+cell.dataset.x;
-const y=+cell.dataset.y;
+const x=+cell.dataset.x,
+y=+cell.dataset.y;
 
 const piece=checkerData[y][x];
 
-/* Pilih Bidak */
 
-if(piece&&piece.color===checkerTurn){
+if(piece&&piece.color==checkerTurn){
 
 checkerSelectSound();
 
-checkerSelected={
-x,y
-};
+checkerSelected={x,y};
 
 checkerLegal=checkerGetCaptures(x,y);
 
@@ -3470,31 +3295,29 @@ return;
 
 }
 
-/* Jalankan Langkah */
 
 const move=checkerLegal.find(m=>m.x==x&&m.y==y);
 
-if(!move)return;
-
+if(move)
 checkerApplyMove(move);
 
 };
 
-checkerCreateBoard();
-checkerRender();
+
+/* RESET */
 
 checkerResetBtn.onclick=()=>{
 
 checkerCreateBoard();
-
 checkerTurn=Math.random()<.5?"blue":"pink";
-
-checkerStatus.textContent=
-`Giliran ${checkerTurn=="blue"?"Blue":"Pink"}`;
 
 checkerRender();
 
 };
+
+
+checkerCreateBoard();
+checkerRender();
 
 </script>
 
